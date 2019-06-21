@@ -77,3 +77,87 @@ vue 组件处理样式的方案
   <div v-bind:style='[styles, otherStyles]' />
   // styles 和 otherStyles 指的对象  {color: 'red'}
   ```
+
+#### Vue 组件的 data(state)
+
+只要页面发生改变就需要设置 data ，由 data 去控制页面的变化。
+
+- 如何创建一个 data，在组件导出的对象下，添加一个属性 data，该属性的属性值为一个函数，该函数必须返回一个对象，对象内写的就是组件的数据。
+- 创建好的 data ，在组件的 template 内可以直接使用
+- 创建好的 data ，在其他地方使用的时候需要加 this.xxx
+- 想要修改 data ，直接对属性进行重新赋值即可
+
+#### Vue 组件的事件处理
+
+使用 v-on 指令绑定事件 可以简写成@ 例子
+
+```html
+<button @click="funName">按钮</button>
+```
+
+事件函数(funName) 需要在组件默认导出的对象下添加一个 methods 属性,该属性的属性值是一个对象，该对象下的方法就可以被当做事件函数。在 template 内 methods 对象下的方法可以直接使用。
+methods 的函数内只要使用了 this 那么这个函数就不能写成箭头函数，必须写成普通函数。
+
+#### 条件渲染
+
+页面中某个元素出现或者消失
+
+1. none --- flex | block | inline-block | inline ,需要使用 v-show 指令 例子:
+
+   ```html
+   <div v-show="数据" class="box"></div>
+   <!-- 如果 数据的值为 false 的话 div 消失，true 的话出现 -->
+   ```
+
+2. 元素在页面中 remove 或者 create ，需要使用指令 v-if ，一般搭配 v-else 一起使用 例子:
+
+   ```html
+   <div v-if="showBox1" class="box1">git 图</div>
+   <div v-else class="box2"></div>
+   ```
+
+   注意 v-if 和 v-else 必须紧挨着，作为兄弟结构
+
+#### 列表渲染
+
+我们页面展示的内容(列表内容),一般都是获取后台数据，将后台数据处理生生页面中的结构。后台的数据一般都是 array。
+v-for 经常搭配 v-if使用,等待后台数据的过程此时展示 gif 图
+在 vue 中实现列表渲染直接使用 v-for 指令 例子
+template
+
+```html
+<div class="goods" v-for="(cart,index) in carts" :key="cart.id">
+  <span>名称: {{cart.goodsName}}</span>
+  <span>索引值: {{index}}</span>
+</div>
+```
+
+v-for 生成的标签必须加上 key 属性，属性值不许保证不重复。跟 vue 底层处理虚拟 dom 有关。一般来说 key 的值都是后台数据的 id 的值
+
+script
+
+```js
+data() {
+    return {
+      carts: [
+        {
+          id: "xdg12",
+          goodsName: "mac book pro",
+          price: 12000,
+          num: 1
+        },
+        {
+          id: "djashg12",
+          goodsName: "奥迪A8",
+          price: 1200000,
+          num: 1
+        }
+      ]
+    };
+  ...
+```
+
+#### 错误提示
+
+- `<Dem> - did you register the component correctly?`
+- `Failed to compile.` 编译失败 `Module not found: Error: Can't resolve './components/Dem' in 'D:\digitalcity授课\2019\1903\1903\vue-demo\src'`
