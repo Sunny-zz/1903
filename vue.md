@@ -1,5 +1,3 @@
-# vue-hello
-
 ## vue 项目介绍
 
 #### 组件
@@ -32,3 +30,50 @@
 - 在 src 文件夹内新建一个文件夹叫 components ，里面新建一个 Button.vue
 - 在 App.vue 中的 script 标签内的最上方使用默认导入导入你的 Button.vue，在默认导出的的对象内添加一个 components 属性，该属性的属性值是一个对象，对象内直接写上导入的组件名
 - 在 App.vue 的 template 标签内直接写以组件名为标签名的标签即可，一般写成单闭合标签即可，就相当于使用了组件。
+
+## Vue 的基础语法
+
+#### 模板语法
+
+vue 允许在 template 内写 js
+
+- 在两个标签中间 使用{{js语法}} ，这个 js 语句必须有返回值
+- 在开始标签内 需要使用指令 v-bind 如何使用 例子如下
+
+  ```js
+  <h1 v-bind:class='js语法' />
+  // v-bind:  指令可以简写成   :
+  ```
+
+#### class 与 style 绑定
+
+vue 组件处理样式的方案
+
+###### class 的绑定
+
+- 对象语法 例子: 加上了 active class 名
+  ```js
+  <div v-bind:class='{ active: true }' />
+  ```
+- 数组语法 例子: 加上了 active 以及 bg class 名
+  ```js
+  <div v-bind:class="[true ? 'active' : '', 'bg']" />
+  ```
+- 原始语法 例子:加上了 active
+  ```js
+  <h1 v-bind:class=" true ? 'active' : 'bg' " />
+  ```
+
+###### style 的绑定
+
+- 对象语法 例子
+
+  ```js
+  <div v-bind:style="{ color: 'red', fontSize: '20px' }" />
+  ```
+
+- 数组语法 例子
+  ```js
+  <div v-bind:style='[styles, otherStyles]' />
+  // styles 和 otherStyles 指的对象  {color: 'red'}
+  ```

@@ -1,12 +1,5 @@
 <template>
-  <div>
-    <button>按钮</button>
-    <button>按钮</button>
-    <button>按钮</button>
-    <button>按钮</button>
-    <button>按钮</button>
-    <button>按钮</button>
-  </div>
+  <button>按钮</button>
 </template>
 
 <script>
