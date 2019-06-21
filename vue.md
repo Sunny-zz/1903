@@ -121,7 +121,7 @@ methods 的函数内只要使用了 this 那么这个函数就不能写成箭头
 #### 列表渲染
 
 我们页面展示的内容(列表内容),一般都是获取后台数据，将后台数据处理生生页面中的结构。后台的数据一般都是 array。
-v-for 经常搭配 v-if使用,等待后台数据的过程此时展示 gif 图
+v-for 经常搭配 v-if 使用,等待后台数据的过程此时展示 gif 图，
 在 vue 中实现列表渲染直接使用 v-for 指令 例子
 template
 
@@ -161,3 +161,16 @@ data() {
 
 - `<Dem> - did you register the component correctly?`
 - `Failed to compile.` 编译失败 `Module not found: Error: Can't resolve './components/Dem' in 'D:\digitalcity授课\2019\1903\1903\vue-demo\src'`
+
+#### homework
+
+仿京东轮播图
+功能
+
+- 左右箭头
+- 按钮
+  规范
+- 一个组件
+- 图片要用数据生成图片的地址写成 网络地址 http
+
+写一个静态页面
