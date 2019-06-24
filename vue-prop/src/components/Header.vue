@@ -1,7 +1,8 @@
 <template>
   <div class="header">
-    <Button type="login" text="登录"/>
-    <Button type='signup' text="注册"/>
+    <!-- 如何向子组件传递非 str 数据 -->
+    <Button type="login1" text="登录"/>
+    <Button type="signup" text="注册"/>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <!-- :class=" type==='login' ? 'btn login' : type==='signup' ? 'btn signup': type==='more'? 'btn more' : 'btn'" -->
   <!-- :class="['btn',type]" -->
-  <button :class="{btn:true,[type]:true}">{{text ? text : '默认按钮'}}</button>
+  <button :class="{btn:true,[type]:true}">{{text}}</button>
 </template>
 
 <script>
@@ -18,7 +18,24 @@ export default {
   //   };
   // },
   // 子组件的 props 禁止修改
-  props: ["text", "type"] //完全相当于上面注释的
+  //props: ["text", "type"] //完全相当于上面注释的
+  // prop 写成对象形式其实就是为了做属性检查
+  props: {
+    text: {
+      type: String,
+      // 有了 default 属性 上面就不需要判断了
+      default: "默认按钮"
+    },
+    type: {
+      // type 的值是必须从 login  signup  more 中选择一个
+      // 验证父组件传递过来的值是否满足条件，不满足报错提示
+      validator: function(value) {
+        // value 代表父组件传递过来的值
+        return ["login", "signup", "more"].indexOf(value) !== -1;
+      }
+      // 无需默认值可以不设置 default
+    }
+  }
 };
 </script>
 
