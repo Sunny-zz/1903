@@ -16,6 +16,7 @@
         <span>名称: {{cart.goodsName}}</span>
         <span>索引值: {{index}}</span>
       </div>
+      <img src alt>
     </div>
   </div>
 </template>
