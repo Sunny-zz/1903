@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     changeColor() {
-      this.color = "#fff";
       // 先看父组件时候传递过来了函数
       // if (this.clickFun) {
       //   this.clickFun();
