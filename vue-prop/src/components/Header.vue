@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <!-- 如何向子组件传递非 str 数据 -->
-    <Button type="login" text="登录"/>
+    <Button type="login" text="登录" :clickFun="login"/>
     <Button type="signup" text="注册"/>
   </div>
 </template>
@@ -12,6 +12,11 @@ export default {
   name: "tou",
   components: {
     Button
+  },
+  methods: {
+    login() {
+      console.log("header组件登录要做的事");
+    }
   }
 };
 </script>

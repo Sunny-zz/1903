@@ -1,7 +1,7 @@
 <template>
   <!-- :class=" type==='login' ? 'btn login' : type==='signup' ? 'btn signup': type==='more'? 'btn more' : 'btn'" -->
   <!-- :class="['btn',type]" -->
-  <button :class="{btn:true,[type]:true}">{{text}}</button>
+  <button :style="{color:color}" @click="changeColor" :class="{btn:true,[type]:true}">{{text}}</button>
 </template>
 
 <script>
@@ -12,11 +12,11 @@
 // console.log(obj[str]);
 export default {
   name: "btn",
-  // data() {
-  //   return {
-  //     text: "父组件传过来的"
-  //   };
-  // },
+  data() {
+    return {
+      color: "#000"
+    };
+  },
   // 子组件的 props 禁止修改
   //props: ["text", "type"] //完全相当于上面注释的
   // prop 写成对象形式其实就是为了做属性检查
@@ -34,6 +34,18 @@ export default {
         return ["login", "signup", "more"].indexOf(value) !== -1;
       }
       // 无需默认值可以不设置 default
+    },
+    clickFun: {
+      type: Function
+    }
+  },
+  methods: {
+    changeColor() {
+      this.color = "#fff";
+      // 先看父组件时候传递过来了函数
+      if (this.clickFun) {
+        this.clickFun();
+      }
     }
   }
 };
