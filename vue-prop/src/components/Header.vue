@@ -1,8 +1,10 @@
 <template>
   <div class="header">
     <!-- 如何向子组件传递非 str 数据 -->
+    <!-- vue 父组件向子组件传递函数 1.普通的属性方式传递，子组件使用 props 接收-->
+    <!-- 2. 父组件向子组件传递自定义事件，子组件使用 $emit("自定义事件名") 接收，在template 直接使用$emit("自定义事件名") 在 script 内 this.$emit("自定义事件名") -->
     <Button type="login" text="登录" :clickFun="login"/>
-    <Button type="signup" text="注册"/>
+    <Button type="signup" text="注册" @clickFun="signUp"/>
   </div>
 </template>
 
@@ -16,6 +18,9 @@ export default {
   methods: {
     login() {
       console.log("header组件登录要做的事");
+    },
+    signUp() {
+      console.log("header组件的注册");
     }
   }
 };

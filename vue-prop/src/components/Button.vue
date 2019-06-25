@@ -43,9 +43,11 @@ export default {
     changeColor() {
       this.color = "#fff";
       // 先看父组件时候传递过来了函数
-      if (this.clickFun) {
-        this.clickFun();
-      }
+      // if (this.clickFun) {
+      //   this.clickFun();
+      // }
+      // 父组件不传递自定义事件不会报错
+      this.$emit("clickFun");
     }
   }
 };
