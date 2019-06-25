@@ -7,19 +7,29 @@
     <Header/>
     <Main/>
     <Button/>
+    <Card :imgUrl="pic" title="哈哈哈"/>
+    <!-- <img :src="pic" alt> -->
   </div>
 </template>
 
 <script>
+import pic from "./assets/1.png";
 import Button from "./components/Button";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import Card from "./components/Card";
 export default {
   name: "app",
+  data() {
+    return {
+      pic: pic
+    };
+  },
   components: {
     Button,
     Header,
-    Main
+    Main,
+    Card
   }
 };
 </script>
