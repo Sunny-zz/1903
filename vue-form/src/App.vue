@@ -29,26 +29,44 @@
     <p>查看结果:{{checkedFruits}}</p>
     <h2>单选</h2>
     <div>
-      <input type="radio" id="one1" value="One" v-model="picked">
-      <label for="one1">One</label>
+      <input type="radio" id="one1" value="male" v-model="picked">
+      <label for="one1">男</label>
       <br>
-      <input type="radio" id="two1" value="Two" v-model="picked">
-      <label for="two1">Two</label>
+      <input type="radio" id="two1" value="female" v-model="picked">
+      <label for="two1">女</label>
       <br>
       <span>Picked: {{ picked }}</span>
     </div>
+    <h2>选择框</h2>
+    <select v-model="selectedVal">
+      <option disabled value>请选择</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+    <h2>修饰符</h2>
+    <!-- v-model 修饰符   .number  .lazy   .trim -->
+    <input v-model.number="number" type="number">
+    <button @click="getNum">按钮(获取输入的数值)</button>
+    <!-- v-on 修饰符 .stop(阻止事件冒泡)  .prevent 阻止默认行为 .self只当在 event.target 是当前元素自身时触发处理函数  .once  事件将只会触发一次 -->
+    <!-- 按键修饰符 绑定的是键盘事件   .enter    .13  -->
+    <button @click="handleClick">测试v-on修饰符</button>
   </div>
 </template>
 
 <script>
+// for  if  else  show  else if  bind  on  model
 export default {
   name: "app",
   data() {
     return {
       val: "1",
       checked: false,
-      checkedFruits: ["榴莲1"],
-      picked: ""
+      checkedFruits: [],
+      picked: "",
+      selectedVal: "",
+      number: 0
     };
   },
   methods: {
@@ -62,6 +80,12 @@ export default {
     // },
     submit() {
       console.log(this.val);
+    },
+    getNum() {
+      console.log(this.number);
+    },
+    handleClick() {
+      console.log("1111");
     }
   }
 };
