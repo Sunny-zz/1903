@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('handleClick')" class="btn">{{text}}</button>
+  <button @click="$emit('handleClick',1,2)" class="btn">{{text}}</button>
 </template>
 
 <script>

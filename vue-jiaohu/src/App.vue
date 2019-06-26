@@ -42,7 +42,8 @@ export default {
     Button
   },
   methods: {
-    open() {
+    open(num, num1) {
+      console.log(num, num1);
       this.show = true;
     },
     close() {
