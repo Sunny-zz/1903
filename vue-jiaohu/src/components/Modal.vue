@@ -1,6 +1,6 @@
 <template>
   <div v-show="visible" class="modal-wrap">
-    <div class="modal-mask"></div>
+    <div @click="$emit('close')" class="modal-mask"></div>
     <div class="modal">
       <div class="modal-head">
         <div class="title">{{title}}</div>
@@ -12,8 +12,10 @@
         <slot name="content"></slot>
       </div>
       <div class="modal-foot">
-        <button style="marginRight:12px;">{{cancelText}}</button>
-        <button>{{okText}}</button>
+        <!-- <button @click="$emit('close')" style="marginRight:12px;">{{cancelText}}</button> -->
+        <Button @handleClick="$emit('close')" :text="cancelText"/>
+        <!-- <button @click="handleOk">{{okText}}</button> -->
+        <Button @handleClick="handleOk" :text="okText"/>
         <!-- 默认插槽 名字是 default -->
         <!-- <slot></slot> -->
       </div>
@@ -21,6 +23,7 @@
   </div>
 </template>
 <script>
+import Button from "./Button";
 export default {
   name: "modal",
   props: {
@@ -37,6 +40,18 @@ export default {
     visible: {
       type: Boolean,
       required: true
+    }
+  },
+  components: {
+    Button
+  },
+  methods: {
+    handleOk() {
+      // 执行父组件的删除操作 发请求到后台 异步
+      // setInterval  setTimeout   ajax
+      // 关闭modal
+      this.$emit("okFunction");
+      this.$emit("close");
     }
   }
 };
