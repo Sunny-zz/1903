@@ -1,7 +1,7 @@
 <template>
   <div>
     <textarea style="resize:none;" cols="30" rows="10" v-model="commentText"></textarea>
-    <button>添加</button>
+    <button @click="add">添加</button>
   </div>
 </template>
 
@@ -12,6 +12,12 @@ export default {
     return {
       commentText: ""
     };
+  },
+  methods: {
+    add() {
+      this.$emit("addComment", this.commentText);
+      this.commentText = "";
+    }
   }
 };
 </script>
