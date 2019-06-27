@@ -242,7 +242,41 @@ this.$emit("clickFun")
   - 组件的自定义事件
   - prop
 - 兄弟组件之间的交互
+  - 将需要交互的 data 定义在共同的祖先组件内
+  - 把祖先的 data 和 修改 data 的方法当作 prop 或自定义事件传递给子组件
 - vuex(终极解决方案)
+
+#### Vue 组件的计算属性 computed
+
+当个你有了一个 data ，但是使用的时候并不是直接使用 data 数据而是使用 data 数据的变形，此时需要定义一个 computed,computed 的用法和 data 一样 例如
+
+```js
+ computed: {
+    commentNum() {
+      return this.comments.length;
+    },
+    currentComments() {
+      return [...this.comments].reverse();
+    }
+  }
+```
+
+#### 插件的使用
+
+- shortId 简短的 id，辅助生成不重复 id
+  - 安装包 `npm i shortid`
+  - import 引入
+  - 使用
+
+#### Vue 组件内的过渡和动画
+
+transition 和 transition-group
+
+#### Vue 的路由
+
+vue 项目内的页面跳转，本身 vue 内不带路由功能，需要自己添加。
+
+- 安装 vue 路由 `npm i vue-router`
 
 #### 错误提示
 
@@ -271,6 +305,6 @@ this.$emit("clickFun")
 - 点击 cancel 关闭，并且执行 父组件的 cancel 事件
 - 点击 ok 关闭，并且执行 父组件的 ok 事件
 
-modal 进阶 
+modal 进阶
 
 将 app 内的 open button 写成组件

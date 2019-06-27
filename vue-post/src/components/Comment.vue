@@ -1,11 +1,12 @@
 <template>
   <div v-if="comments.length" class="comment-box">
-    <ul>
+    <span>评论数: {{number}}</span>
+    <transition-group class="list" tag="ul" name="show">
       <li v-for="comment in comments" :key="comment.id">
         <span>{{comment.text}}</span>
         <button @click="$emit('delComment',comment.id)">删除</button>
       </li>
-    </ul>
+    </transition-group>
   </div>
   <div v-else class="empty">评论为空，请添加。。</div>
 </template>
@@ -15,7 +16,7 @@
 // 事件内 获取输入框的内容  创建一个对象  将 获取的内容放到对象内   并将该对象添加到数组内
 export default {
   name: "comment",
-  props: ["comments"],
+  props: ["comments", "number"],
   methods: {}
 };
 
@@ -26,4 +27,15 @@ export default {
 </script>
 
 <style>
+.list {
+  list-style-type: circle;
+}
+.show-enter-active,
+.show-leave-active {
+  transition: opacity 1.5s linear;
+}
+.show-enter,
+.show-leave-to {
+  opacity: 0;
+}
 </style>
