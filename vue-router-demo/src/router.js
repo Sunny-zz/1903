@@ -7,6 +7,8 @@ import Topics from "./components/Topics.vue"
 import Recommended from "./components/Recommended.vue"
 import FrontEnd from "./components/FrontEnd.vue"
 import BackEnd from "./components/BackEnd.vue"
+import Post from "./components/Post.vue"
+import Error from "./components/Error.vue"
 // 给 vue 项目安装路由功能
 Vue.use(VueRouter)
 // 创建路由
@@ -44,8 +46,25 @@ const routes = [
     path: "/pins"
   },
   {
+    path: "/topics",
+    redirect: "/newtopics"
+  },
+  {
     component: Topics,
-    path: "/topics"
+    path: "/newtopics"
+  },
+  // 文章展示页  有很多页 但是只需要一个组件就够了 只不过组件内的数据不一样
+  // 把该页面创建成动态页面     动态路由    path 的地址内有变量
+  // 动态路径参数 以冒号开头
+  {
+    component: Post,
+    path: "/post/:id"
+  },
+  // 当上述路由全部匹配失败 就要出 404 页面  出现404页面的地址有和多种情况
+  // 所以 我们将 404 路由的path 写成 * 而且必须写在所有路由的最下面
+  {
+    component: Error,
+    path: "*"
   }
 ]
 

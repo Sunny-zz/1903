@@ -16,13 +16,17 @@
     </div>-->
     <ul class="list">
       <li>
-        <router-link to="/welcome/recommended">推荐</router-link>
+        <router-link
+          active-class="nav-active"
+          :class=" $route.path === '/' ? 'nav-active' : '' "
+          to="/welcome/recommended"
+        >推荐</router-link>
       </li>
       <li>
-        <router-link to="/welcome/backend">后端</router-link>
+        <router-link active-class="nav-active" to="/welcome/backend">后端</router-link>
       </li>
       <li>
-        <router-link to="/welcome/frontend">前端</router-link>
+        <router-link active-class="nav-active" to="/welcome/frontend">前端</router-link>
       </li>
     </ul>
     <!-- 如果 router-view 组件写在了 某一个路由组件内，那么次 router-view 展示的是该路由组件下的子路由 -->

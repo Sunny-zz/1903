@@ -277,6 +277,44 @@ transition 和 transition-group
 vue 项目内的页面跳转，本身 vue 内不带路由功能，需要自己添加。
 
 - 安装 vue 路由 `npm i vue-router`
+- 新建一个 src/router.js
+- 在 router.js 内给 vue 项目安装上路由功能
+  ```js
+  import Vue from "vue"
+  import VueRouter from "vue-router"
+  Vue.use(VueRouter)
+  ```
+- 创建路由 `new VueRouter({routes:xxxxx,mode: xxxx})`
+  ```js
+  const routes = [
+    {
+      component: "组件名",
+      path: "地址"
+    }
+  ]
+  const router = new VueRouter({
+    routes,
+    mode: "history"
+  })
+  ```
+- 将创建好的路由导出
+  ```js
+  export default router
+  ```
+- 到项目的 main.js 内导入路由并使用
+  ```js
+  import router from "./router"
+  new Vue({
+    router
+  })
+  ```
+- 在 Vue 项目所有组件内都可以使用路由了
+  ```html
+  <!-- 使用 router-view 标签展示路由 -->
+  <router-view></router-view>
+  <!-- 使用 router-link 标签实现路由的跳转 -->
+  <router-link to="路由页面的path"></router-link>
+  ```
 
 #### 错误提示
 
