@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>Todo Mvc</h1>
-    <TodoForm @addTodo="addTodo"/>
-    <Todo @completed="completed" :todos="todos"/>
+    <TodoForm @addTodo="addTodo" />
+    <Todo @completed="completed" :todos="todos" />
   </div>
 </template>
 
