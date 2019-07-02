@@ -1,0 +1,22 @@
+{
+  "topics": [
+    {
+      "id": "1234",
+      "title": "8 个有用的 js 技巧",
+      "likeNum": 100,
+      "commentNum": 300
+    },
+    {
+      "id": "5678",
+      "title": "让你瞬间提高工作效率的常用js函数汇总(持续更新)",
+      "likeNum": 10,
+      "commentNum": 30
+    },
+    {
+      "id": "1890",
+      "title": "抛弃 JS，使用 TypeScript",
+      "likeNum": 50,
+      "commentNum": 250
+    }
+  ]
+}

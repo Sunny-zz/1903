@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "text": "传递所有部分即可更新",
+      "id": "1312ds"
+    },
+    {
+      "text": "测试 post",
+      "author": {
+        "author_name": "xiaohuaer",
+        "address": "chc kash "
+      },
+      "id": "nXMFEin"
+    }
+  ]
+}

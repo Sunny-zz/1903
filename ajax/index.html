@@ -10,6 +10,7 @@
     <span>等一会。。。。</span>
     <h1 style="display:none"></h1>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
     <script>
       // ajax    Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）。      ajaj
       // 同步阻塞异步非阻塞
@@ -85,11 +86,164 @@
       //     console.log(res)
       //   }
       // })
+      // 回调地狱
+      // $(".box").show(1000, function() {
+      //   console.log("222")
+      //   $(".box1").show(2000,function(){
+
+      //   })
+      // })
 
       // axios 工具 实现  ajax 请求
       // axios 在 html 内的用法
 
       // 原生的 fetch 发 ajax
+
+      // ajax
+      // 原生 ajax   ----->   XMLHttpRequest 对象
+
+      // jquery    ajax    $.ajax({})     $.get({})    $.post({})
+      // 请求的方法   get   post
+
+      // axios   fetch
+      // axios
+      //   .get("http://jsonplaceholder.typicode.com/users/10")
+      //   .then(res => {
+      //     // res 代表的是后台请求的响应      axios 把后台的响应封装到了一个对象内   对象内的  data 属性就代表的是后台的响应
+      //     console.log(res.data)
+      //   })
+      //   .catch(err => {
+      //     console.log(err)
+      //   })
+      // get 请求传参都是写到地址的? 后
+      // .get("https://cnodejs.org/api/v1/topics?tab=job&limit=2&page=1")
+      // axios
+      //   .get("https://cnodejs.org/api/v1/topics", {
+      //     params: {
+      //       page: 1,
+      //       tab: "job",
+      //       limit: 2
+      //     }
+      //   })
+      //   .then(res => {
+      //     console.log(res.data.data)
+      //   })
+      // axios
+      //   .post("https://cnodejs.org/api/v1/accesstoken", {
+      //     accesstoken: "ec87b4a4-23f0-4de7-905a-cf1739f1128b"
+      //   })
+      //   .then(res => {
+      //     console.log(res.data)
+      //   })
+      //   .catch(err => {
+      //     console.log(err)
+      //   })
+
+      // fetch
+      // fetch("https://cnodejs.org/api/v1/topics?tab=job&limit=2&page=1", {
+      //   method: "get"
+      // })
+      //   .then(response => response.json())
+      //   .then(res => {
+      //     // res就是我们请求的repos
+      //     console.log(res.data)
+      //   })
+      // fetch("https://cnodejs.org/api/v1/accesstoken", {
+      //   method: "post",
+      //   // 前后台数据交互是 json 类型 所以 body 传递内容需要写成 json 格式
+      //   // 但是前提能传递 json 必须设置请求头 headers
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   body: JSON.stringify({
+      //     accesstoken: "ec87b4a4-23f0-4de7-905a-cf1739f1128b"
+      //   })
+      // })
+      //   .then(response => response.json())
+      //   .then(res => {
+      //     // res就是我们请求的repos
+      //     console.log(res)
+      //     console.log("222222")
+      //   })
+      // promise     异步解决方案
+      // resolve  成功的函数    失败的函数
+      // const promise = new Promise(function(resolve, reject) {
+      //   // 异步操作
+      //   console.log("异步操作正在执行")
+      //   setTimeout(() => {
+      //     console.log("异步操作执行完毕")
+      //     // 获取到一个异步执行完毕的结果
+      //     resolve(111)
+      //   }, 1000)
+      // })
+      // promise.then(res => {
+      //   console.log(res)
+      // })
+
+      // const promise = new Promise(function(resolve, reject) {
+      //   const XHR = new XMLHttpRequest()
+      //   XHR.open("GET", "http://jsonplaceholder.typicode.com/users/10")
+      //   XHR.send()
+      //   XHR.onreadystatechange = function() {
+      //     if (XHR.readyState === 4 && XHR.status === 200) {
+      //       // console.log(resolve)
+      //       resolve(JSON.parse(XHR.responseText))
+      //     } else if (XHR.readyState === 4 && XHR.status != 200) {
+      //       reject()
+      //     }
+      //   }
+      // })
+      //   .then(res => {
+      //     console.log(res)
+      //   })
+      //   .catch(() => {
+      //     console.log("错了")
+      //   })
+
+      // Promise.all([promise1,promise2,...]).then(resolve函数)
+      // resolve 函数会在前面的多个 promise 执行完毕之后在执行
+
+      // Promise.all([
+      //   axios.get("http://jsonplaceholder.typicode.com/users/10"),
+      //   axios.get("http://jsonplaceholder.typicode.com/users/1")
+      // ]).then(res => {
+      //   console.log(res)
+      //   fun()
+      // })
+
+      // 有 a 并且有 b 才能执行某件事  fun
+      // function fun() {
+      //   console.log("某件事")
+      // }
+      // async  await
+      // 我们以后的工作都是 首先后台数据都是跑在服务器上的，也要保证你的前端页面也是跑在服务器上的，去实现服务器与服务器之间的交互
+      // axios.get("http://localhost:3008/posts").then(res => {
+      //   console.log(res.data)
+      // })
+
+      // axios
+      //   .post("http://localhost:3008/posts", {
+      //     text: "测试 post",
+      //     author: {
+      //       author_name: "xiaohuaer",
+      //       address: "chc kash "
+      //     }
+      //   })
+      //   .then(res => {
+      //     console.log(res.data)
+      //   })
+      // axios.delete("http://localhost:3008/posts/132ds").then(res => {
+      //   console.log(res.data)
+      // })
+      // put 全部替换   patch  局部更新
+      // axios
+      //   .put("http://localhost:3008/posts/1312ds", {
+      //     text: "传递所有部分即可更新"
+      //   })
+      //   .then(res => {
+      //     console.log(res.data)
+      //   })
+      //  从 localhost:5000  去   localhost:3008 请求数据      就会遇到跨域问题
     </script>
   </body>
 </html>
