@@ -4,13 +4,13 @@
     <ul>
       <li>
         <!-- @click.native  给组件的原生标签绑定事件 -->
-        <router-link @click.native="xxx" to="/?sort=popular">热门</router-link>
+        <router-link @click.native="change('popular')" to="/?sort=popular">热门</router-link>
       </li>
       <li>
-        <router-link to="/?sort=newest">最新</router-link>
+        <router-link @click.native="change('newest')" to="/?sort=newest">最新</router-link>
       </li>
       <li>
-        <router-link to="/?sort=three_days_hottest">热榜</router-link>
+        <router-link @click.native="change('hottest')" to="/?sort=three_days_hottest">热榜</router-link>
       </li>
     </ul>
     <Topics :topics="topics" />
@@ -42,9 +42,18 @@ export default {
     Topics
   },
   methods: {
-    xxx() {
-      console.log("11111");
+    change(type) {
+      // console.log("11111");
       // 重新获取后台数据
+      axios.get(`http://localhost:3008/topics?${type}=true`).then(res => {
+        // console.log(res.data);
+        setTimeout(() => {
+          this.topics = res.data;
+        }, 1000);
+      });
+    },
+    getTopics() {
+      // 获取数据的函数
     }
   }
 };
