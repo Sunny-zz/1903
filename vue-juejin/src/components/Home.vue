@@ -24,19 +24,15 @@ export default {
   name: "home",
   data() {
     return {
-      topics: []
+      topics: [],
+      type: "popular"
     };
   },
   created() {
     console.log("初始化 data");
     // 使用 axios 发请求 更新 数据
     // 默认获取 热门的数据
-    axios.get(`http://localhost:3008/topics?popular=true`).then(res => {
-      // console.log(res.data);
-      setTimeout(() => {
-        this.topics = res.data;
-      }, 1000);
-    });
+    this.getTopics();
   },
   components: {
     Topics
@@ -45,15 +41,24 @@ export default {
     change(type) {
       // console.log("11111");
       // 重新获取后台数据
+      // 清空数组以及重新获取数据在当前页面只需要执行一次即可
+      if (this.type === type) {
+        console.log("type 改过了 别瞎点");
+      } else {
+        console.log("更改 type");
+        this.type = type;
+        this.topics = [];
+        this.getTopics(type);
+      }
+    },
+    getTopics(type = "popular") {
+      // 获取数据的函数
       axios.get(`http://localhost:3008/topics?${type}=true`).then(res => {
         // console.log(res.data);
         setTimeout(() => {
           this.topics = res.data;
         }, 1000);
       });
-    },
-    getTopics() {
-      // 获取数据的函数
     }
   }
 };
