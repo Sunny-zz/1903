@@ -28,7 +28,9 @@ export default {
     // 通过路由传参的方式将文章数据传递过来并展示
     // 使用  to 传递 query 用来做查询
     axios.get(`http://localhost:3008/topics/${id}`).then(res => {
-      setTimeout(() => {}, 500);
+      setTimeout(() => {
+        this.topic = res.data
+      }, 500);
     });
   }
 };
