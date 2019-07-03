@@ -6,7 +6,12 @@
       alt
     />
     <ul v-else>
-      <router-link v-for="topic in topics" :key="topic.id" tag="li" :to="`/topic/${topic.id}`">
+      <router-link
+        v-for="topic in topics"
+        :key="topic.id"
+        tag="li"
+        :to="{path:`/topic/${topic.id}`}"
+      >
         <h3>{{topic.title}}</h3>
       </router-link>
     </ul>
