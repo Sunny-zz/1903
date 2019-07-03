@@ -6,7 +6,9 @@
       alt
     />
     <ul v-else>
-      <li>1231</li>
+      <router-link v-for="topic in topics" :key="topic.id" tag="li" :to="`/topic/${topic.id}`">
+        <h3>{{topic.title}}</h3>
+      </router-link>
     </ul>
   </div>
 </template>
@@ -21,7 +23,7 @@
 // 5. beforeUpdate  组件更新 data 前
 // 6. updated 组件更新 data 完毕
 // 7. destroyed 组件被销毁
-
+import axios from "axios";
 export default {
   name: "topics",
   data() {
@@ -35,6 +37,12 @@ export default {
   created() {
     console.log("初始化 data");
     // 使用 axios 发请求 更新 数据
+    axios.get("http://localhost:3008/topics").then(res => {
+      // console.log(res.data);
+      setTimeout(() => {
+        this.topics = res.data;
+      }, 1000);
+    });
   },
   beforeMount() {
     console.log("再页面中渲染之前");
