@@ -2,6 +2,17 @@
   <div>
     文章列表
     <!-- 带分页器 -->
+    <ul>
+      <li v-for="post in posts" :key="post.id">{{post.title}}</li>
+    </ul>
+    <el-pagination
+      @current-change="changePage"
+      background
+      layout="prev, pager, next"
+      :page-size="2"
+      :total="6"
+      :current-page.sync="page"
+    ></el-pagination>
   </div>
 </template>
 
@@ -14,7 +25,31 @@
 //   }
 // ];
 // localhost:3008/posts?_page=5&_limit=10
-export default {};
+import axios from "axios";
+export default {
+  name: "posts",
+  data() {
+    return {
+      posts: [],
+      page: 1
+    };
+  },
+  created() {
+    axios.get("http://localhost:3008/posts?_page=1&_limit=2").then(res => {
+      this.posts = res.data;
+    });
+  },
+  methods: {
+    changePage() {
+      // 获取当前页数 x
+      axios
+        .get(`http://localhost:3008/posts?_page=${this.page}&_limit=2`)
+        .then(res => {
+          this.posts = res.data;
+        });
+    }
+  }
+};
 </script>
 
 <style>
