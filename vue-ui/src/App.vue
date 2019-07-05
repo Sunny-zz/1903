@@ -21,21 +21,17 @@
         <img src="./assets/5.jpg" alt />
       </el-carousel-item>
     </el-carousel>-->
-    <Posts />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Posts from "./components/Posts";
 export default {
   name: "app",
   methods: {
     xxx() {
       console.log("xxxxxxx");
     }
-  },
-  components: {
-    Posts
   }
 };
 </script>

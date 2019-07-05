@@ -11,8 +11,8 @@
       layout="prev, pager, next"
       :page-size="2"
       :total="6"
-      :current-page.sync="page"
     ></el-pagination>
+    <!-- :current-page.sync="page" -->
   </div>
 </template>
 
@@ -30,8 +30,7 @@ export default {
   name: "posts",
   data() {
     return {
-      posts: [],
-      page: 1
+      posts: []
     };
   },
   created() {
@@ -40,13 +39,13 @@ export default {
     });
   },
   methods: {
-    changePage() {
-      // 获取当前页数 x
-      axios
-        .get(`http://localhost:3008/posts?_page=${this.page}&_limit=2`)
-        .then(res => {
-          this.posts = res.data;
-        });
+    changePage(x) {
+      // 获取当前页数 x   组件的回调参数
+      // 修改当前页面的地址
+      this.$router.push(`/?_page=${x}`);
+      axios.get(`http://localhost:3008/posts?_page=${x}&_limit=2`).then(res => {
+        this.posts = res.data;
+      });
     }
   }
 };
