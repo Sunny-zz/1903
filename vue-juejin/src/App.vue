@@ -1,16 +1,17 @@
 <template>
   <div>
-    <div>
+    <div class="header">
       <img src="https://b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" alt />
+
       <ul class="nav">
         <li>
-          <router-link to="/">首页</router-link>
+          <router-link to="/" :class="$route.path === '/' ? 'active' : ''">首页</router-link>
         </li>
         <li>
-          <router-link to="/pins">沸点</router-link>
+          <router-link active-class="active" to="/pins">沸点</router-link>
         </li>
         <li>
-          <router-link to="/huati">话题</router-link>
+          <router-link active-class="active" to="/huati">话题</router-link>
         </li>
       </ul>
     </div>
@@ -33,5 +34,8 @@ export default {
   justify-content: space-around;
   background-color: #ccc;
   margin: 0 auto;
+}
+.active {
+  color: #00b3d4;
 }
 </style>
