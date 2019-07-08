@@ -60,4 +60,7 @@ export default {
 .cube-scroll-wrapper {
   height: 400px;
 }
+.cube-sticky-fixed {
+  position: static;
+}
 </style>
