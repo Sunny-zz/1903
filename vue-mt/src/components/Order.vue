@@ -57,14 +57,28 @@ export default {
     //   console.log("sticky-change", current);
     // },
     addCart(food) {
-      console.log("xxxx");
-      // 各种判断
+      // 各种判断 判断 此商品买过没买过
+      if (this.carts.find(item => item.id === food.id)) {
+        // 买过了
+        axios
+          .patch(`http://localhost:3008/carts/${food.id}`, {
+            num: this.carts.find(item => item.id === food.id).num + 1
+          })
+          .then(res => {
+            // 更新本地的 data  carts  一定要根据后台数据更新
+            // 更新数组内某个对象的属性的属性值
+            this.carts.find(item => item.id === food.id).num = res.data.num;
+          });
+      } else {
+        // 没买过
+        axios
+          .post("http://localhost:3008/carts", { ...food, num: 1 })
+          .then(res => {
+            console.log(res.data);
+            this.carts.push(res.data);
+          });
+      }
       // 向后 http://localhost:3008/carts 发送 post ,参数 { food 数据, num : 1}
-      axios
-        .post("http://localhost:3008/carts", { ...food, num: 1 })
-        .then(res => {
-          console.log(res.data);
-        });
     }
   }
 };
