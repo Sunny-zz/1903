@@ -24,7 +24,7 @@
         </ul>
       </cube-scroll-nav-panel>
     </cube-scroll-nav>
-    <Cart :carts="carts" />
+    <Cart :carts="carts" @addCart="addCart" @subCart="subCart" />
   </div>
 </template>
 
@@ -86,7 +86,7 @@ export default {
       }
       // 向后 http://localhost:3008/carts 发送 post ,参数 { food 数据, num : 1}
     },
-    subCart(id) {
+    subCart(id, closeCart) {
       // 较少购物车中对应商品的数量
       // 商品个数>1    path 更新 num
       // 商品个数=1    delete 删除此条数据
@@ -105,6 +105,13 @@ export default {
         axios.delete(`http://localhost:3008/carts/${id}`).then(res => {
           //  更新本地数据
           this.carts = this.carts.filter(item => item.id != id);
+          // 如果使用的购物车内的减号减到没有了
+          // 关闭购物车弹窗
+          // 因为如果点击的不是购物车的减号就不会传递关闭购物车弹窗的函数
+          if (closeCart && !this.carts.length) {
+            // console.log(closeCart);
+            closeCart();
+          }
         });
       }
     }

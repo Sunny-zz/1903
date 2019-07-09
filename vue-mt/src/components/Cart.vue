@@ -22,20 +22,20 @@
       <span v-else-if="total < 10" class="cart-right">差￥{{10-total}}起送</span>
       <button v-else class="cart-right">去结算</button>
     </div>
-    <div class="mask"></div>
-    <div class="cart-desc">
+    <div v-show="show" @click="show = false" class="mask"></div>
+    <div v-show="show" class="cart-desc">
       <div class="cart-head">
         <span>购物车</span>
         <span>清空购物车</span>
       </div>
-      <div class="cart-list">
+      <div class="cart-list" :style="{maxHeight: '160px'}">
         <div class="cart-food" v-for="cart in carts" :key="cart.id">
           <span>{{cart.name}}</span>
           <span>{{cart.price * cart.num}}</span>
           <div>
-            <button>-</button>
+            <button @click="$emit('subCart',cart.id,function(){show=false})">-</button>
             <span>{{cart.num}}</span>
-            <button>+</button>
+            <button @click="$emit('addCart',cart)">+</button>
           </div>
         </div>
       </div>
@@ -56,6 +56,11 @@
 export default {
   name: "cart",
   props: ["carts"],
+  data() {
+    return {
+      show: false
+    };
+  },
   computed: {
     total() {
       // 已知一个数组  把数组内对象的 price * num  的值加在一起
@@ -73,7 +78,7 @@ export default {
   },
   methods: {
     showCart() {
-      console.log("1111111");
+      this.show = !this.show;
     }
   }
 };
@@ -134,6 +139,7 @@ export default {
 .cart-desc .cart-list {
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 .cart-desc .cart-list .cart-food {
   height: 40px;
