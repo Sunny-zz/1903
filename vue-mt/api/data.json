@@ -235,20 +235,7 @@
       "info": "一碗皮蛋瘦肉粥，香浓软滑，饱腹暖心，让人喝这样的一碗粥也觉得心满意足",
       "icon": "http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114",
       "image": "http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/750/h/750",
-      "num": 22
-    },
-    {
-      "name": "皮蛋瘦肉粥10",
-      "id": "asdasdasdf",
-      "price": 10,
-      "oldPrice": "",
-      "description": "咸粥",
-      "sellCount": 229,
-      "rating": 100,
-      "info": "一碗皮蛋瘦肉粥，香浓软滑，饱腹暖心，让人喝这样的一碗粥也觉得心满意足",
-      "icon": "http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114",
-      "image": "http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/750/h/750",
-      "num": 25
+      "num": 1
     }
   ]
 }
