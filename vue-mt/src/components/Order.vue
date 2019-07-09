@@ -24,7 +24,7 @@
         </ul>
       </cube-scroll-nav-panel>
     </cube-scroll-nav>
-    <Cart :carts="carts" @addCart="addCart" @subCart="subCart" />
+    <Cart :carts="carts" @addCart="addCart" @subCart="subCart" @clearCart="clearCart" />
   </div>
 </template>
 
@@ -114,6 +114,19 @@ export default {
           }
         });
       }
+    },
+    clearCart(closeCart) {
+      // 需要使用 for 发送很多个 delte 请求  还得保证所有请求完毕之后才执行 closeCart 和清空本地 carts 数据
+      // Promise.all()
+      // carts   --------->     [axios.delete(xxxx),axios.delete(xxx),...]
+      // 从一个数组变成另外一个数组 个数不变       映射    数组的 map 方法
+      const arr = this.carts.map(item =>
+        axios.delete(`http://localhost:3008/carts/${item.id}`)
+      );
+      Promise.all(arr).then(res => {
+        this.carts = [];
+        closeCart();
+      });
     }
   }
 };
