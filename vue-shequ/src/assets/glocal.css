@@ -4,6 +4,7 @@
 }
 body {
   margin: 0;
+  background-color: #e1e1e1;
 }
 /* 样式初始化不要 clearfix 不要 */
 a {
