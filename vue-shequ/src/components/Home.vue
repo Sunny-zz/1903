@@ -25,7 +25,18 @@
     </ul>
     <div v-if="topics.length" class="content">
       <ul>
-        <li v-for="topic in topics" :key="topic.id">{{topic.title}}</li>
+        <li v-for="topic in topics" :key="topic.id">
+          <img :style="{width:'30px',height:'30px'}" :src="topic.author.avatar_url" alt />
+          <div class="count">
+            <span class="reply_count">{{topic.reply_count}}</span>
+            <span>/</span>
+            <span class="visit_count">{{topic.visit_count}}</span>
+          </div>
+          <span
+            :class="{tab: true,active: topic.top || topic.good}"
+          >{{topic.top?'置顶': topic.good ? '精华': topic.tab === 'share'? '分享':topic.tab === 'ask'? '问答' : topic.tab === 'job'? '招聘' : 'weex' }}</span>
+          <router-link :to="`/topic/${topic.id}`">{{topic.title}}</router-link>
+        </li>
       </ul>
     </div>
     <img
@@ -55,6 +66,7 @@ export default {
           .get(`https://www.vue-js.com/api/v1/topics/?tab=${tab}`)
           .then(res => {
             this.topics = res.data.data;
+            console.log(res.data.data[0]);
           });
       }
     }
@@ -100,8 +112,35 @@ export default {
   padding: 0;
 }
 .home .content ul li {
-  line-height: 50px;
-  padding: 0 10px;
+  padding: 13px 10px;
   border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+}
+.home .content ul li .count {
+  width: 60px;
+  text-align: center;
+  font-size: 12px;
+}
+.home .content ul li .count .reply_count {
+  color: #9e78c0;
+  font-size: 14px;
+}
+.home .content ul li .count .visit_count {
+  font-size: 10px;
+  color: #b4b4b4;
+}
+.home .content ul li .tab {
+  padding: 2px 3px;
+  border-radius: 3px;
+  background-color: #e5e5e5;
+  font-size: 12px;
+  height: 20px;
+  color: #999;
+  margin-right: 5px;
+}
+.home .content ul li .tab.active {
+  color: #fff;
+  background-color: #369219;
 }
 </style>
