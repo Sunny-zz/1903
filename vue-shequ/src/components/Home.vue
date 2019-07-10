@@ -39,7 +39,7 @@
           <span class="title">
             <router-link :to="`/topic/${topic.id}`">{{topic.title}}</router-link>
           </span>
-          <span class="time">{{'100天前'}}</span>
+          <span class="time">{{myMoment(topic.last_reply_at)}}</span>
         </li>
       </ul>
     </div>
@@ -53,6 +53,8 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
+
 export default {
   name: "home",
   data() {
@@ -73,6 +75,12 @@ export default {
             console.log(res.data.data[0]);
           });
       }
+    }
+  },
+  methods: {
+    myMoment(time) {
+      moment.locale("zh-cn");
+      return moment(time).fromNow();
     }
   }
 };
@@ -99,6 +107,7 @@ export default {
 .home .nav li {
   margin-right: 25px;
 }
+
 .home .nav li a {
   color: #369219;
   padding: 3px 4px;
@@ -120,6 +129,9 @@ export default {
   border-bottom: 1px solid #f0f0f0;
   display: flex;
   align-items: center;
+}
+.home .content ul li:hover {
+  background-color: #f6f6f6;
 }
 .home .content ul li > img {
   flex-shrink: 0;
@@ -164,7 +176,11 @@ export default {
 .home .content ul li a:visited {
   color: #888;
 }
+.home .content ul li a:hover {
+  text-decoration: underline;
+}
 .home .content ul li .time {
   flex-shrink: 0;
+  margin-left: 10px;
 }
 </style>
