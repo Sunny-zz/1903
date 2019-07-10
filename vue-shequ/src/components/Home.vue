@@ -33,9 +33,13 @@
             <span class="visit_count">{{topic.visit_count}}</span>
           </div>
           <span
+            v-if="$route.fullPath === '/' || $route.fullPath==='/?tab=all' || topic.top || topic.good"
             :class="{tab: true,active: topic.top || topic.good}"
           >{{topic.top?'置顶': topic.good ? '精华': topic.tab === 'share'? '分享':topic.tab === 'ask'? '问答' : topic.tab === 'job'? '招聘' : 'weex' }}</span>
-          <router-link :to="`/topic/${topic.id}`">{{topic.title}}</router-link>
+          <span class="title">
+            <router-link :to="`/topic/${topic.id}`">{{topic.title}}</router-link>
+          </span>
+          <span class="time">{{'100天前'}}</span>
         </li>
       </ul>
     </div>
@@ -117,8 +121,12 @@ export default {
   display: flex;
   align-items: center;
 }
+.home .content ul li > img {
+  flex-shrink: 0;
+}
 .home .content ul li .count {
   width: 60px;
+  flex-shrink: 0;
   text-align: center;
   font-size: 12px;
 }
@@ -131,6 +139,7 @@ export default {
   color: #b4b4b4;
 }
 .home .content ul li .tab {
+  flex-shrink: 0;
   padding: 2px 3px;
   border-radius: 3px;
   background-color: #e5e5e5;
@@ -142,5 +151,20 @@ export default {
 .home .content ul li .tab.active {
   color: #fff;
   background-color: #369219;
+}
+.home .content ul li .title {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.home .content ul li a {
+  color: #333;
+}
+.home .content ul li a:visited {
+  color: #888;
+}
+.home .content ul li .time {
+  flex-shrink: 0;
 }
 </style>
