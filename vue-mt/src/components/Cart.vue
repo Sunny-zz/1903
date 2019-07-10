@@ -26,7 +26,7 @@
     <div v-show="show" class="cart-desc">
       <div class="cart-head">
         <span>购物车</span>
-        <span>清空购物车</span>
+        <span @click="$emit('clearCart',function(){show=false})">清空购物车</span>
       </div>
       <div class="cart-list" :style="{maxHeight: '160px'}">
         <div class="cart-food" v-for="cart in carts" :key="cart.id">
