@@ -39,6 +39,11 @@
           <span v-html="comment.content"></span>
         </li>
       </ul>
+      <div class="comment-form">
+        <span>添加回复</span>
+        <textarea cols="30" rows="10" v-model="text"></textarea>
+        <button @click="addComment">回复</button>
+      </div>
     </div>
   </div>
 </template>
@@ -51,7 +56,8 @@ export default {
   data() {
     return {
       topic: null,
-      is_collect: false
+      is_collect: false,
+      text: ""
     };
   },
   computed: {
@@ -94,6 +100,24 @@ export default {
             }
           });
       }
+    },
+    addComment() {
+      //
+      axios
+        .post(`https://www.vue-js.com/api/v1/topic/${this.topic.id}/replies`, {
+          accesstoken: sessionStorage.getItem("token"),
+          content: this.text
+        })
+        .then(res => {
+          // 发送请求成功之后要更新本地的 评论  但是请求的结果只是一个  评论 id 要更新本地的话需要 创建一个评论对象
+          // 所以我们换另一个方案 重新请求整个文章数据
+
+          axios
+            .get(`https://www.vue-js.com/api/v1/topic/${this.topic.id}`)
+            .then(res => {
+              this.topic = res.data.data;
+            });
+        });
     }
   }
 };
