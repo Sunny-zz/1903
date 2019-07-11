@@ -103,6 +103,7 @@ export default {
   font-size: 14px;
   background-color: #f6f6f6;
   margin: 0;
+  list-style: none;
 }
 .home .nav li {
   margin-right: 25px;
@@ -150,7 +151,7 @@ export default {
   font-size: 10px;
   color: #b4b4b4;
 }
-.home .content ul li .tab {
+.tab {
   flex-shrink: 0;
   padding: 2px 3px;
   border-radius: 3px;
@@ -160,7 +161,7 @@ export default {
   color: #999;
   margin-right: 5px;
 }
-.home .content ul li .tab.active {
+.tab.active {
   color: #fff;
   background-color: #369219;
 }

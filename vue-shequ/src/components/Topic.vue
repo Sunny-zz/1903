@@ -2,10 +2,35 @@
   <div v-if="topic" class="topic">
     <article>
       <div class="article-head">
-        <h2>{{topic.title}}</h2>
-        <p></p>
+        <div>
+          <span class="tab active" v-if="topic.top || topic.good">{{topic.top? '置顶' :'精华' }}</span>
+          <h2>{{topic.title}}</h2>
+          <span
+            v-if="isLogin"
+            @click="changeCollect"
+            class="collect"
+          >{{is_collect ? '取消收藏' : '加入收藏'}}</span>
+        </div>
+        <p style="font-size: 12px;">
+          <span>
+            <b>·</b>
+            发布于{{myMoment(topic.create_at)}}
+          </span>
+          <span>
+            <b>·</b>
+            作者 {{topic.author.loginname}}
+          </span>
+          <span>
+            <b>·</b>
+            {{topic.visit_count}} 次浏览
+          </span>
+          <span>
+            <b>·</b>
+            来自 {{topic.tab === 'share' ? '分享' : topic.tab ==='ask' ? '问答' : topic.tab ==='job' ? '招聘' : 'weex'}}
+          </span>
+        </p>
       </div>
-      <div class="content" v-html="topic.content"></div>
+      <div class="topic_content" v-html="topic.content"></div>
     </article>
     <div class="comment">
       <p>{{topic.replies.length}}回复</p>
@@ -20,12 +45,19 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 export default {
   name: "topic",
   data() {
     return {
-      topic: null
+      topic: null,
+      is_collect: false
     };
+  },
+  computed: {
+    isLogin() {
+      return Boolean(sessionStorage.getItem("token"));
+    }
   },
   created() {
     // 获取路由的动态参数     $route
@@ -34,29 +66,69 @@ export default {
       console.log(res.data.data);
       this.topic = res.data.data;
     });
+  },
+  methods: {
+    myMoment(time) {
+      moment.locale("zh-cn");
+      return moment(time).fromNow();
+    },
+    changeCollect() {
+      const obj = {
+        topic_id: this.$route.params.id,
+        accesstoken: sessionStorage.getItem("token")
+      };
+      if (this.is_collect) {
+        axios
+          .post(`https://www.vue-js.com/api/v1/topic/de_collect`, obj)
+          .then(res => {
+            if (res.data.success) {
+              this.is_collect = false;
+            }
+          });
+      } else {
+        axios
+          .post(`https://www.vue-js.com/api/v1/topic/collect`, obj)
+          .then(res => {
+            if (res.data.success) {
+              this.is_collect = true;
+            }
+          });
+      }
+    }
   }
 };
 </script>
 
 <style>
 .topic {
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+}
+
+.topic article {
+  border-radius: 3px;
   background-color: #fff;
+  margin-bottom: 10px;
 }
 .topic .article-head {
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
+.topic .article-head > div {
+  display: flex;
+  align-items: flex-end;
+}
+
 .topic .article-head h2 {
-  margin: 8px 0;
+  margin: 8px 0 0 0;
+  flex-grow: 1;
 }
-.topic .content {
+.topic .topic_content {
   padding: 10px;
   border-top: 1px solid #e5e5e5;
 }
-.topic .content .markdown-text > :first-child,
+.markdown-text > :first-child,
 .preview > :first-child {
   margin-top: 0;
 }
@@ -99,11 +171,24 @@ export default {
   line-height: 2em;
   margin: 1em 0;
 }
-.content img {
+
+.topic_content img {
   height: auto;
   max-width: 100%;
   vertical-align: middle;
   border: 0;
   -ms-interpolation-mode: bicubic;
+}
+
+.comment > p {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: #f6f6f6;
+  margin: 0;
+  padding: 10px;
+}
+.comment ul {
+  background-color: #fff;
+  margin: 0;
 }
 </style>
