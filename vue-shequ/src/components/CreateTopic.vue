@@ -7,21 +7,39 @@
       <option value="job">招聘</option>
     </select>
     <input type="text" v-model="title" />
-    <textarea name id cols="30" rows="10" v-model="content"></textarea>
+    <quill-editor
+      style="width:500px"
+      v-model="content"
+      ref="myQuillEditor"
+      :options="editorOption"
+      @blur="onEditorBlur($event)"
+      @focus="onEditorFocus($event)"
+      @ready="onEditorReady($event)"
+    ></quill-editor>
     <button @click="submit">提交</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
+import { quillEditor } from "vue-quill-editor";
 export default {
   name: "app",
   data() {
     return {
       tab: "",
       title: "",
-      content: ""
+      content: "",
+      editorOption: {
+        // 富文本编辑器的配置 添加删除某些功能
+      }
     };
+  },
+  components: {
+    quillEditor
   },
   methods: {
     submit() {
@@ -39,6 +57,20 @@ export default {
           this.content = "";
           this.$router.push(`/topic/${res.data.topic_id}`);
         });
+    },
+    onEditorBlur(quill) {
+      console.log("editor blur!", quill);
+    },
+    onEditorFocus(quill) {
+      console.log("editor focus!", quill);
+    },
+    onEditorReady(quill) {
+      console.log("editor ready!", quill);
+    },
+    onEditorChange({ quill, html, text }) {
+      // 当富文本编辑器输入了内容的话 同步修改 你自己的  data content
+      console.log("editor change!", quill, html, text);
+      this.content = html;
     }
   }
 };
