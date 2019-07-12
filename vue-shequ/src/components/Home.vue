@@ -101,7 +101,6 @@ export default {
           .get(`https://www.vue-js.com/api/v1/topics/?tab=${tab}&page=${num}`)
           .then(res => {
             this.topics = res.data.data;
-
             console.log(res.data.data[0]);
           });
       }

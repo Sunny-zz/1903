@@ -5,6 +5,7 @@
         <img src="https://www.vue-js.com/public/images/vue.png" alt />
         <h1>Vue.js</h1>
       </router-link>
+      <router-link to="/topic/create" v-if="userInfo">发布话题</router-link>
       <div v-if="!userInfo" class="login">
         <input type="text" v-model="text" />
         <button @click="login">登录</button>
