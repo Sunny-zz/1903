@@ -55,9 +55,11 @@ export default {
           accesstoken: this.text
         })
         .then(res => {
+          console.log(res.data);
           this.userInfo = res.data;
           // 将得到的信息存储到本地浏览器
           sessionStorage.setItem("token", this.text);
+          sessionStorage.setItem("user_id", res.data.id);
           // sessionStorage.setItem('token',this.text)
         });
     },
