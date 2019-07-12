@@ -41,13 +41,13 @@
             <span @click="up(comment.id)">{{ isUped(comment.id) ?'👍' : '赞'}}</span>
             {{comment.ups.length ? comment.ups.length : ''}}
           </span>
-          <span>回复</span>
+          <span @click="addReply(comment.author.loginname)">回复</span>
         </li>
       </ul>
       <div class="comment-form">
         <span>添加回复</span>
-        <textarea cols="30" rows="10" v-model="text"></textarea>
-        <button @click="addComment">回复</button>
+        <textarea class="textarea" cols="30" rows="10" v-model="text"></textarea>
+        <button  @click="addComment">回复</button>
       </div>
     </div>
   </div>
@@ -106,7 +106,7 @@ export default {
           });
       }
     },
-    addComment() {
+    addComment(id) {
       axios
         .post(`https://www.vue-js.com/api/v1/topic/${this.topic.id}/replies`, {
           accesstoken: sessionStorage.getItem("token"),
@@ -160,6 +160,12 @@ export default {
           .find(item => item.id === id)
           .ups.indexOf(sessionStorage.getItem("user_id")) !== -1
       );
+    },
+    addReply(loginname) {
+      // 修改  text   修改成  @某个人的loginname
+      this.text = `@${loginname} `;
+      // 原生的获取焦点
+      document.querySelector(".textarea").focus();
     }
   }
 };
