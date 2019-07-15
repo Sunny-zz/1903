@@ -5,6 +5,7 @@
         <img src="https://www.vue-js.com/public/images/vue.png" alt />
         <h1>Vue.js</h1>
       </router-link>
+      <router-link to="/topic/create" v-if="userInfo">发布话题</router-link>
       <div v-if="!userInfo" class="login">
         <input type="text" v-model="text" />
         <button @click="login">登录</button>
@@ -55,9 +56,11 @@ export default {
           accesstoken: this.text
         })
         .then(res => {
+          console.log(res.data);
           this.userInfo = res.data;
           // 将得到的信息存储到本地浏览器
           sessionStorage.setItem("token", this.text);
+          sessionStorage.setItem("user_id", res.data.id);
           // sessionStorage.setItem('token',this.text)
         });
     },

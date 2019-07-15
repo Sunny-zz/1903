@@ -37,12 +37,17 @@
       <ul>
         <li v-for=" comment in topic.replies" :key="comment.id">
           <span v-html="comment.content"></span>
+          <span style="margin-right: 20px;">
+            <span @click="up(comment.id)">{{ isUped(comment.id) ?'👍' : '赞'}}</span>
+            {{comment.ups.length ? comment.ups.length : ''}}
+          </span>
+          <span @click="addReply(comment.author.loginname)">回复</span>
         </li>
       </ul>
       <div class="comment-form">
         <span>添加回复</span>
-        <textarea cols="30" rows="10" v-model="text"></textarea>
-        <button @click="addComment">回复</button>
+        <textarea class="textarea" cols="30" rows="10" v-model="text"></textarea>
+        <button  @click="addComment">回复</button>
       </div>
     </div>
   </div>
@@ -101,8 +106,7 @@ export default {
           });
       }
     },
-    addComment() {
-      //
+    addComment(id) {
       axios
         .post(`https://www.vue-js.com/api/v1/topic/${this.topic.id}/replies`, {
           accesstoken: sessionStorage.getItem("token"),
@@ -111,13 +115,57 @@ export default {
         .then(res => {
           // 发送请求成功之后要更新本地的 评论  但是请求的结果只是一个  评论 id 要更新本地的话需要 创建一个评论对象
           // 所以我们换另一个方案 重新请求整个文章数据
-
           axios
             .get(`https://www.vue-js.com/api/v1/topic/${this.topic.id}`)
             .then(res => {
               this.topic = res.data.data;
+              3;
             });
         });
+    },
+    up(id) {
+      // 发请求
+      // reply_id
+      if (sessionStorage.getItem("token")) {
+        axios
+          .post(`https://www.vue-js.com/api/v1/reply/${id}/ups`, {
+            accesstoken: sessionStorage.getItem("token")
+          })
+          .then(res => {
+            // 返回一个对象   {successs:true,action: 'down'}
+            // 要根据 action 的值，更新本地的展示内容(topic)
+            console.log(res.data);
+            if (res.data.action === "up") {
+              // 此时是你之前没点过，点了之后变成 up
+              // 要更新 topic 内的 replies 中的某一个评论下的 ups 数组
+              this.topic.replies
+                .find(item => item.id === id)
+                .ups.push(sessionStorage.getItem("user_id"));
+            } else {
+              this.topic.replies.find(
+                item => item.id === id
+              ).ups = this.topic.replies
+                .find(item => item.id === id)
+                .ups.filter(item => item != sessionStorage.getItem("user_id"));
+            }
+          });
+      } else {
+        alert("请登录");
+      }
+    },
+    isUped(id) {
+      // 刚进页面的时候看评论是否被用户点赞了
+      return (
+        this.topic.replies
+          .find(item => item.id === id)
+          .ups.indexOf(sessionStorage.getItem("user_id")) !== -1
+      );
+    },
+    addReply(loginname) {
+      // 修改  text   修改成  @某个人的loginname
+      this.text = `@${loginname} `;
+      // 原生的获取焦点
+      document.querySelector(".textarea").focus();
     }
   }
 };
