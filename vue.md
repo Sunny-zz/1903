@@ -316,6 +316,23 @@ vue 项目内的页面跳转，本身 vue 内不带路由功能，需要自己�
   <router-link to="路由页面的path"></router-link>
   ```
 
+#### Vue 项目部署
+
+- 先确保本地的 localhost:8080 下的项目能正常运行
+- 在项目下打开命令行执行 `npm run build` ,把你做好的项目打包到项目下的 dist 文件夹下
+- 默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上，例如 https://www.my-app.com/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.my-app.com/my-app/，则设置 publicPath 为 /my-app/。
+  更改 publicPath，修改 vue cli 的配置环境
+
+  - 在项目根目录下 新建一个文件 vue.config.js ,该文件会自动被加入到 vue 的配置环境中。
+  - 在文件内写
+
+    ```js
+    module.exports = {
+      publicPath: process.env.NODE_ENV === "production" ? "/你的子目录地址/" : "/"
+    }
+    ```
+- publicPath 配置完毕需要重新编译打包生成新的  dist 文件夹在重新部署到你的 github 上
+
 #### 错误提示
 
 - `<Dem> - did you register the component correctly?`
