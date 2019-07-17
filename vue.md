@@ -328,10 +328,51 @@ vue 项目内的页面跳转，本身 vue 内不带路由功能，需要自己�
 
     ```js
     module.exports = {
-      publicPath: process.env.NODE_ENV === "production" ? "/你的子目录地址/" : "/"
+      publicPath:
+        process.env.NODE_ENV === "production" ? "/你的子目录地址/" : "/"
     }
     ```
-- publicPath 配置完毕需要重新编译打包生成新的  dist 文件夹在重新部署到你的 github 上
+
+- publicPath 配置完毕需要重新编译打包生成新的 dist 文件夹在重新部署到你的 github 上
+
+#### Vuex
+
+状态管理模式 ----> 状态共享到 store,通过 store 共享给其他的所有组件, 组件也可以直接修改共享状态
+如何创建 store
+
+- 安装 vuex `npm i vuex`
+- 在项目下的 src 文件夹下新建一个 store.js。内部写
+  ```js
+  import Vue from "vue"
+  import Vuex from "vuex"
+  Vue.use(Vuex) //详细参考 官方文档中 插件一节(mixins)
+  const store = new Vuex.Store({
+    // state 是该项目共享数据的地方
+    state: {
+      count: 0
+    },
+    // mutations 内写的都是函数  该函数的作用是修改 state 的方法，而且该函数只能接收两个参数,第一个参数是 state 也就是上面定义好的共享数据,第二个参数是载荷数据(payload),指的是修改 state 需要的其他参数。
+    mutations: {
+      changeCount(state, newCount) {
+        // 将 count 修改成任意值
+        state.count = newCount
+      }
+    }
+  })
+  export default store
+  ```
+- 进入到项目下的 main.js 文件内，导入 store, 并且在 new Vue 中添加一条属性叫 store 值为你导入的 store
+
+组件中使用 store
+
+- 直接使用 \$store.state 获取共享的数据即可
+- 一般 store 内的数据需要配合 computed 使用
+
+组件内动态修改 store
+
+- 使用 \$store 下的 commit 方法去触发创建好的 mutation 函数 `$store.commit('changeCount')`
+  - 修改 store 的时候有可能需要传递参数。如何传递----> `$store.commit('changeCount',1000)`
+  - 注意 传递的参数只能有一个，想要传递多个的话，把多个参数合并成对象传递
 
 #### 错误提示
 

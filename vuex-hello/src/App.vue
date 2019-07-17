@@ -27,7 +27,6 @@ export default {
     },
     change(newNum, newNum1) {
       // mutation 函数传参
-
       this.$store.commit("changeNum", { newNum, newNum1 });
     }
   }
