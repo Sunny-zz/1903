@@ -2,7 +2,10 @@
   <div>
     <span>评论</span>
     <ul v-if="comments.length">
-      <li v-for="comment in comments" :key="comment.id">{{comment.text}}</li>
+      <li v-for="comment in comments" :key="comment.id">
+        {{comment.text}}
+        <button @click="$store.dispatch('delComment',{id: comment.id})">删除</button>
+      </li>
     </ul>
     <input type="text" v-model="val" />
     <button @click="addComment">添加评论</button>
@@ -25,7 +28,9 @@ export default {
   },
   computed: {
     comments() {
-      return this.$store.state.comments;
+      // 获取 getters 数据
+      console.log(this.$store);
+      return this.$store.getters.currentComments;
     }
   },
   methods: {

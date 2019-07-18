@@ -19,6 +19,9 @@ export default new Vuex.Store({
     },
     addComment(state, newComment) {
       state.comments.push(newComment)
+    },
+    delComment(state, id) {
+      state.comments = state.comments.filter(comment => comment.id != id)
     }
   },
   // 当你需要通过异步操作修改 state 时需要将异步操作写在 action 函数内
@@ -52,6 +55,17 @@ export default new Vuex.Store({
           commit("addComment", res.data)
           payload.clearInput()
         })
+    },
+    delComment({ commit }, payload) {
+      axios.delete(`http://localhost:3008/comments/${payload.id}`).then(res => {
+        commit("delComment", payload.id)
+      })
+    }
+  },
+  // store 的计算属性 并不是 组件内 data 的计算属性 功能一样
+  getters: {
+    currentComments(state) {
+      return [...state.comments].reverse()
     }
   }
 })
