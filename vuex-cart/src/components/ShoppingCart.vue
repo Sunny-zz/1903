@@ -16,15 +16,6 @@
 import axios from "axios";
 export default {
   name: "shoppingcart",
-  created() {
-    this.$store.dispatch("getCarts");
-    // 测试更新后台的 carts 数据
-    // axios
-    //   .patch("http://localhost:3008/carts", { productByIds: ["1", "2"],quantityById:{"1":3,"2":4} })
-    //   .then(res => {
-    //     console.log(res);
-    //   });
-  },
   computed: {
     cartProducts() {
       return this.$store.getters.cartProductInfo;

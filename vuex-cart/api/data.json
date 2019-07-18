@@ -18,13 +18,5 @@
       "price": 19.99,
       "inventory": 5
     }
-  ],
-  "carts": {
-    "productByIds": [
-      "2"
-    ],
-    "quantityById": {
-      "2": 1
-    }
-  }
+  ]
 }

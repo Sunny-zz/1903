@@ -6,17 +6,26 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     products: [],
-    carts: null
+    carts: {
+      productByIds: [],
+      quantityById: {}
+    }
   },
   mutations: {
     getProducts(state, products) {
       state.products = products
     },
-    getCarts(state, carts) {
-      state.carts = carts
-    },
-    addToCart(state, carts) {
-      state.carts = carts
+    addToCart(state, payload) {
+      // 更新本地的 carts
+      // 第一次买某件商品
+      // 直接修改对象下属性的属性值
+      state.carts.productByIds.push(payload.id)
+      state.carts.quantityById[payload.id] = 1
+      // 直接对对象进行重新赋值
+      // state.carts = {
+      //   productByIds: [...state.carts.productByIds, payload.id],
+      //   quantityById: { ...state.carts.quantityById, [payload.id]: 1 }
+      // }
     }
   },
   actions: {
@@ -24,45 +33,27 @@ const store = new Vuex.Store({
       axios.get("http://localhost:3008/products").then(res => {
         commit("getProducts", res.data)
       })
-    },
-    getCarts({ commit }) {
-      axios.get("http://localhost:3008/carts").then(res => {
-        commit("getCarts", res.data)
-        console.log(res.data)
-      })
-    },
-    addToCart({ commit }, payload) {
-      // 根据点击的商品的 add to cart 按钮,更新后台数据，触发 mutation
-      // add to cart 就点击一次
-      axios
-        .patch("http://localhost:3008/carts", {
-          productByIds: [payload.id],
-          quantityById: { [payload.id]: 1 }
-        })
-        .then(res => {
-          console.log(res.data)
-          // 返回的更新好的数据
-          commit("addToCart", res.data)
-        })
     }
   },
   getters: {
     cartProductInfo(state) {
       // [1,2,3]   ===>     [1,8,27]
       // ;[1, 2, 3].map(item => item * item * item)
-
-      const cartProducts = state.carts
-        ? state.carts.productByIds.map(item => {
-            const product = state.products.find(product => product.id === item)
-            return {
-              title: product.title,
-              price: product.price,
-              quantity: state.carts.quantityById[item],
-              id: item
-            }
-          })
-        : []
-
+      const cartProducts =
+        state.carts.productByIds.length && state.products.length
+          ? state.carts.productByIds.map(item => {
+              const product = state.products.find(
+                product => product.id === item
+              )
+              return {
+                title: product.title,
+                price: product.price,
+                quantity: state.carts.quantityById[item],
+                id: item
+              }
+            })
+          : []
+      console.log(cartProducts)
       return cartProducts
       // map   reduce
       // [{

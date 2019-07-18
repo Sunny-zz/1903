@@ -7,7 +7,7 @@
           <span>{{product.title}}</span>&nbsp;&nbsp;
           <span>￥{{product.price}}</span>
         </p>
-        <button @click="$store.dispatch('addToCart',{id:product.id})">add to cart</button>
+        <button @click="$store.commit('addToCart',{id:product.id})">add to cart</button>
       </li>
     </ul>
   </div>
