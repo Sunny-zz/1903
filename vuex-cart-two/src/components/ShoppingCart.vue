@@ -9,9 +9,9 @@
           <span>{{goods.quantity}}</span>
           <button
             :disabled="goods.quantity >= goods.inventory ? true : false"
-            @click="$store.commit('addToCart',{id:goods.id})"
+            @click="addToCart({id:goods.id})"
           >+</button>
-          <button @click="$store.commit('delToCart',{id:goods.id})">-</button>
+          <button @click="delToCart({id:goods.id})">-</button>
         </li>
       </ul>
       <div>总价: ￥{{total}}</div>
@@ -21,16 +21,26 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "shoppingcart",
+  // computed: {
+  //   cartProducts() {
+  //     return this.$store.getters.cartProductInfo;
+  //   },
+  //   total() {
+  //     return this.$store.getters.total;
+  //   }
+  // },
   computed: {
-    cartProducts() {
-      return this.$store.getters.cartProductInfo;
-    },
-    total() {
-      return this.$store.getters.total.toFixed(2);
-    }
+    ...mapGetters({
+      cartProducts: "cartProductInfo",
+      total: "total"
+    })
+    // ...mapGetters(["total", "cartProductInfo"])
+  },
+  methods: {
+    ...mapMutations(["addToCart", "delToCart"])
   }
 };
 </script>

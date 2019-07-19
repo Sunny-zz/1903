@@ -7,10 +7,10 @@
           <span>{{product.title}}</span>&nbsp;&nbsp;
           <span>￥{{product.price}}</span>
         </p>
-        <!-- <button
+        <button
           :disabled="quantityById[product.id] >= product.inventory ? true : false "
           @click="$store.commit('addToCart',{id:product.id})"
-        >add to cart</button>-->
+        >add to cart</button>
       </li>
     </ul>
   </div>
@@ -32,8 +32,9 @@ export default {
   // },
   computed: {
     ...mapState({
-      // products: state => state.products,  下面是简写
-      products: "products",
+      products: state => state.products.all,
+      // 下面是简写
+      // products: "products",
       quantityById: state => state.carts.quantityById
       // 当你需要用的组件内的一些方法或数据时需要把函数写成普通函数
     })
@@ -42,6 +43,8 @@ export default {
     // ...mapState(["products"])
   },
   created() {
+    // 要触发 products 模块的 action
+    console.log(this.$store);
     this.$store.dispatch("getProducts");
   }
 };
