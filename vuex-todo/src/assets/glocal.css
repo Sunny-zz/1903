@@ -1,0 +1,13 @@
+/* 所有组件的公共样式 */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+/* 样式初始化不要 clearfix 不要 */
+a {
+  text-decoration: none;
+}
+
+/* 其他的看你的项目 */
