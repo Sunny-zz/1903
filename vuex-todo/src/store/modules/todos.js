@@ -46,7 +46,20 @@ const todos = {
         })
     }
   },
-  getters: {}
+  getters: {
+    showTodos(state, getters, rootState) {
+      return state.all.filter(item =>
+        rootState.filter.type === "all"
+          ? true
+          : rootState.filter.type === "active"
+          ? !item.completed
+          : item.completed
+      )
+    },
+    activeNum(state) {
+      return state.all.filter(item => !item.completed).length
+    }
+  }
 }
 
 export default todos
