@@ -82,7 +82,7 @@ export default {
 
 <style>
 #main {
-  width: 600px;
+  width: 7.5rem;
   height: 400px;
 }
 </style>
