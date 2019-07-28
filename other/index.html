@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .checkbox {
+        display: none;
+      }
+      .text {
+        display: block;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #ccc;
+        text-align: center;
+        line-height: 20px;
+      }
+      .text > span {
+        display: none;
+      }
+      .checkbox:checked + .text {
+        background-color: #ccc;
+      }
+      .checkbox:checked + .text > span {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <input class="checkbox" type="checkbox" id="xx" />
+    <label class="text" for="xx"><span>✔</span></label>
+  </body>
+</html>
