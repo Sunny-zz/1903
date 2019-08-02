@@ -24,41 +24,88 @@ class Loop extends Component {
           "https://imgcps.jd.com/ling/4458207/5aSP5pel55WF6aWu/54iG5qy-55u06ZmN/p-5bd8253082acdd181d02fa5d/4878e798.jpg"
       }
     ],
-    activeIndex: 0
+    // 0 1 2 3 4 5
+    // index 0 1 2 3
+    activeIndex: 1,
+    isHasTransition: true
   }
   changeActiveIndex = index => {
     this.setState({
-      activeIndex: index
+      activeIndex: index + 1,
+      isHasTransition: true
     })
   }
   next = () => {
-    const { activeIndex, pics } = this.state
+    const { activeIndex } = this.state
+    // 0 1 2 3 4 5
+    // 5 在点击按钮的时候 变成 2
     this.setState({
-      activeIndex: activeIndex === pics.length - 1 ? 0 : activeIndex + 1
+      activeIndex: activeIndex + 1,
+      isHasTransition: true
     })
+    // setState 函数是异步操作
+    // console.log(this.state.activeIndex)
+    // console.log(document.querySelector(".pic").style.marginLeft)
+    // 依据更新之后的 state 要停止动画并且把修改成另外一个值
+  }
+  // 组件更新 state 完毕默认会触发生命周期 componentDidUpdate
+  componentDidUpdate = () => {
+    const { pics, activeIndex } = this.state
+    setTimeout(() => {
+      if (activeIndex === pics.length + 1) {
+        // 先去掉 transition     5 代表视觉上的第一张要换成前面的第一张不能加动画
+        // 把 activeIndex 换成 1
+        this.setState({
+          activeIndex: 1,
+          isHasTransition: false
+        })
+      } else if (activeIndex === 0) {
+        this.setState({
+          activeIndex: pics.length,
+          isHasTransition: false
+        })
+      }
+    }, 750)
   }
   prev = () => {
-    const { activeIndex, pics } = this.state
+    const { activeIndex } = this.state
     this.setState({
-      activeIndex: activeIndex === 0 ? pics.length - 1 : activeIndex - 1
+      activeIndex: activeIndex - 1,
+      isHasTransition: true
     })
   }
   render() {
-    const { pics, activeIndex } = this.state
+    // 在这个函数内可以获取到更新之后的state用于更新页面
+    // 但是在这个函数内不能更新 state ，如果更新了的话会进入死循环
+    const { pics, activeIndex, isHasTransition } = this.state
     const imgList = pics.map(ele => (
       <img className='img' key={ele.id} src={ele.imgSrc} alt='' />
     ))
     const btnList = pics.map((ele, index) => (
       <li
         onMouseEnter={() => this.changeActiveIndex(index)}
-        className={activeIndex === index ? "active" : ""}
+        className={
+          activeIndex - 1 === index ||
+          (index === 0 && activeIndex === 5) ||
+          (index === 3 && activeIndex === 0)
+            ? "active"
+            : ""
+        }
         key={ele.id}
       />
     ))
     return (
       <div className='loop-wrap'>
-        <div className='pic' style={{ marginLeft: `${activeIndex * -590}px` }}>
+        <div
+          className='pic'
+          style={{
+            marginLeft: `${activeIndex * -590}px`,
+            transition: isHasTransition ? "margin-left 0.75s" : ""
+          }}
+        >
+          <img className='img' src={pics[pics.length - 1].imgSrc} alt='' />
           {imgList}
+          <img className='img' src={pics[0].imgSrc} alt='' />
         </div>
         <div onClick={this.next} className='next'>
           {">"}

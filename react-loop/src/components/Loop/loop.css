@@ -7,7 +7,7 @@
 }
 .loop-wrap .pic {
   width: calc(4 * 590px);
-  transition: margin-left 0.75s;
+
   display: flex;
 }
 .loop-wrap .pic .img {
