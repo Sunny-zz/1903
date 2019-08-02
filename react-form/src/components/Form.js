@@ -28,6 +28,12 @@ class Form extends Component {
     // partialState[stateName] = targetValue
     // this.setState(partialState)
   }
+  log = event => {
+    // const val = document.querySelector("input.inp").value
+    // const val = event.target.value
+    const val = this.inp.value
+    console.log("非受控组件input 的值:" + val)
+  }
   render() {
     const { username, comment, value, isAgree } = this.state
     // render 函数在组件出现的时候和组件的 state 更新之后会触发
@@ -70,6 +76,21 @@ class Form extends Component {
           onChange={event => this.change("isAgree", event)}
         />
         <label>是否同意霸王条款</label>
+        <br />
+        <br />
+        <h2>非受控组件</h2>
+        {/* 非受控组件如果要设置默认值的话 请不要设置 value  和 checked 以及 selected 属性，请设置 defaultValue  defaultChecked  defaultSelected*/}
+        <input
+          // ref 的值是一个函数(带箭头的) 该函数默认接收一个参数，该参数指的就是这个标签的真实 dom 节点,函数内把这个真实 dom 节点赋值给了 组件下的 inp 属性
+          // 所以访问组件下的 inp 属性就是拿到了标签的真实 dom 节点
+          // 这样的做法相当于创建了一个组件内的全局变量
+          ref={inpDom => (this.inp = inpDom)}
+          onChange={this.log}
+          className='inp'
+          type='text'
+          defaultValue='哈哈哈'
+        />
+        <input type='checkbox' name='' id='' defaultChecked={true} />
       </div>
     )
   }
