@@ -71,3 +71,9 @@
      text: PropTypes.string
    }
    ```
+
+###### react 项目启动修改 port
+
+```json
+"start": "set PORT=3006 && react-scripts start"
+```
