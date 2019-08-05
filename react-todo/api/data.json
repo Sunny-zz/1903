@@ -1,19 +1,9 @@
 {
   "todos": [
     {
-      "id": "123",
-      "text": "666",
-      "isCompleted": true
-    },
-    {
       "text": "123",
       "isCompleted": false,
       "id": "SSdXV8D"
-    },
-    {
-      "text": "456",
-      "isCompleted": false,
-      "id": "S5WGby9"
     },
     {
       "text": "123123",

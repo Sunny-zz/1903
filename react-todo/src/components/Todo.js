@@ -61,8 +61,10 @@ class Todo extends Component {
   }
   del = id => {
     const { todos } = this.state
-    this.setState({
-      todos: todos.filter(todo => todo.id !== id)
+    axios.delete(`http://localhost:3008/todos/${id}`).then(res => {
+      this.setState({
+        todos: todos.filter(todo => todo.id !== id)
+      })
     })
   }
   componentDidMount() {
@@ -74,6 +76,7 @@ class Todo extends Component {
       })
     })
   }
+
   render() {
     // 对 state 的计算,直接写到 render 函数内，但是一定要保证不能修改 state
     console.log("生命周期函数 render")
