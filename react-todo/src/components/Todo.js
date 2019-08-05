@@ -1,9 +1,18 @@
 import React, { Component } from "react"
+import TodoForm from "./TodoForm"
+import TodoContent from "./TodoContent"
+import TodoFoot from "./TodoFoot"
+
 class Todo extends Component {
   state = {
-    todos: [],
-    text: "",
-    type: "active"
+    todos: [
+      {
+        id: "122",
+        text: "123123",
+        isCompleted: false
+      }
+    ],
+    type: "all"
   }
   handleInput = e => {
     this.setState({
@@ -57,7 +66,7 @@ class Todo extends Component {
   }
   render() {
     // 对 state 的计算,直接写到 render 函数内，但是一定要保证不能修改 state
-    const { todos, text, type } = this.state
+    const { todos, type } = this.state
     const currentTodos = todos.filter(todo =>
       type === "all"
         ? true
@@ -65,36 +74,13 @@ class Todo extends Component {
         ? !todo.isCompleted
         : todo.isCompleted
     )
-    const content = todos.length ? (
-      <ul>
-        {currentTodos.map(todo => (
-          <li key={todo.id}>
-            <span
-              style={{
-                textDecoration: todo.isCompleted ? "line-through" : "none",
-                userSelect: "none"
-              }}
-              onClick={() => this.completed(todo.id)}
-            >
-              {todo.text}
-            </span>
-            <button onClick={() => this.del(todo.id)}>删除</button>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <div>请添加todo</div>
-    )
     const activeNum = todos.filter(item => !item.isCompleted).length
     return (
       <div>
-        <input type='text' value={text} onChange={this.handleInput} />
-        <button onClick={this.add}>提交</button>
-        {content}
         <div>
-          <span>
+          {/* <span>
             {activeNum} item{activeNum === 1 ? "" : "s"} left
-          </span>
+          </span> */}
           {/* <button
             onClick={() =>
               this.setState({
@@ -104,12 +90,20 @@ class Todo extends Component {
           >
             all
           </button> */}
-          <button onClick={() => this.changeType("all")}>all</button>
+          {/* <button onClick={() => this.changeType("all")}>all</button>
           <button onClick={() => this.changeType("active")}>active</button>
           <button onClick={() => this.changeType("completed")}>
             completed
-          </button>
+          </button> */}
         </div>
+        <TodoForm />
+        <TodoContent
+          todos={todos}
+          currentTodos={currentTodos}
+          del={this.del}
+          completed={this.completed}
+        />
+        <TodoFoot />
       </div>
     )
   }
