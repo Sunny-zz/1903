@@ -2,7 +2,8 @@ import React, { Component } from "react"
 class Todo extends Component {
   state = {
     todos: [],
-    text: ""
+    text: "",
+    type: "active"
   }
   handleInput = e => {
     this.setState({
@@ -43,11 +44,30 @@ class Todo extends Component {
       })
     })
   }
+  changeType = type => {
+    this.setState({
+      type: type
+    })
+  }
+  del = id => {
+    const { todos } = this.state
+    this.setState({
+      todos: todos.filter(todo => todo.id !== id)
+    })
+  }
   render() {
-    const { todos, text } = this.state
+    // 对 state 的计算,直接写到 render 函数内，但是一定要保证不能修改 state
+    const { todos, text, type } = this.state
+    const currentTodos = todos.filter(todo =>
+      type === "all"
+        ? true
+        : type === "active"
+        ? !todo.isCompleted
+        : todo.isCompleted
+    )
     const content = todos.length ? (
       <ul>
-        {todos.map(todo => (
+        {currentTodos.map(todo => (
           <li key={todo.id}>
             <span
               style={{
@@ -58,22 +78,37 @@ class Todo extends Component {
             >
               {todo.text}
             </span>
+            <button onClick={() => this.del(todo.id)}>删除</button>
           </li>
         ))}
       </ul>
     ) : (
       <div>请添加todo</div>
     )
+    const activeNum = todos.filter(item => !item.isCompleted).length
     return (
       <div>
         <input type='text' value={text} onChange={this.handleInput} />
         <button onClick={this.add}>提交</button>
         {content}
         <div>
-          <span>0 item left</span>
-          <button>all</button>
-          <button>active</button>
-          <button>completed</button>
+          <span>
+            {activeNum} item{activeNum === 1 ? "" : "s"} left
+          </span>
+          {/* <button
+            onClick={() =>
+              this.setState({
+                type: "all"
+              })
+            }
+          >
+            all
+          </button> */}
+          <button onClick={() => this.changeType("all")}>all</button>
+          <button onClick={() => this.changeType("active")}>active</button>
+          <button onClick={() => this.changeType("completed")}>
+            completed
+          </button>
         </div>
       </div>
     )
