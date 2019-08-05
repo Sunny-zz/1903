@@ -77,6 +77,7 @@ class Loop extends Component {
   render() {
     // 在这个函数内可以获取到更新之后的state用于更新页面
     // 但是在这个函数内不能更新 state ，如果更新了的话会进入死循环
+
     const { pics, activeIndex, isHasTransition } = this.state
     const imgList = pics.map(ele => (
       <img className='img' key={ele.id} src={ele.imgSrc} alt='' />
