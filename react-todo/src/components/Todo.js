@@ -19,10 +19,10 @@ class Todo extends Component {
       text: e.target.value
     })
   }
-  add = () => {
+  add = text => {
     // 添加 todo
     // 坚决不能直接修改 state
-    const { todos, text } = this.state
+    const { todos } = this.state
     if (text.trim()) {
       this.setState({
         todos: [
@@ -96,7 +96,7 @@ class Todo extends Component {
             completed
           </button> */}
         </div>
-        <TodoForm />
+        <TodoForm add={this.add} />
         <TodoContent
           todos={todos}
           currentTodos={currentTodos}
