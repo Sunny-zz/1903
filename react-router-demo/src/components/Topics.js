@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Route, Link } from "react-router-dom"
-import User from "./User"
+import Topic from "./Topic"
 class Users extends Component {
   // 子路由里面的地址必须由 父路由的地址开头
   // 如何在 react 组件内获取路由地址的相关信息
@@ -15,17 +15,19 @@ class Users extends Component {
       <div>
         <ul>
           <li>
-            <Link to={`${match.url}/zhangsan`}>张三</Link>
+            <Link to={`${match.url}/hot`}>热门</Link>
           </li>
           <li>
-            <Link to={`${match.url}/zhaosi`}>赵四</Link>
+            <Link to={`${match.url}/new`}>最新</Link>
           </li>
           <li>
-            <Link to={`${match.url}/liuneng`}>刘能</Link>
+            <Link to={`${match.url}/hottest`}>热榜</Link>
           </li>
         </ul>
         {/* 设置动态路由 */}
-        <Route path={`${match.path}/:id`} component={User} />
+        {/* render 属性的作用是类似  component  */}
+        <Route path={`${match.path}`} exact render={() => <div>请选择</div>} />
+        <Route path={`${match.path}/:id`} component={Topic} />
       </div>
     )
   }

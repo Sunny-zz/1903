@@ -72,6 +72,15 @@
    }
    ```
 
+###### react 路由
+
+- 安装 npm i react-router-dom
+- 路由中比较重要的组件 (BrowserRouter | HashRouter) Route Link NavLink Redirect Switch Prompt 和 withRouter 方法
+  BrowserRouter 该组件是路由的包裹组件(凡是路由相关的东西必须有该组件包裹，他模拟的页面是完全仿照浏览器的历史记录的)
+  Route 该组件就代表一个页面，当页面的地址和该组件的 path 匹配时，就展示该组件对应的 component
+  Link NavLink 这两个组件就是用来做路由跳转的(组件的 to 属性)
+- 自定义的组件如果被 Route 包裹了(写在了 Route 的 component 属性下)，那么该自定义组件会默认接收一些相关路由的 props(history location match)
+
 ###### react 项目启动修改 port
 
 ```json
