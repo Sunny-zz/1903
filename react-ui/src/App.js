@@ -1,41 +1,28 @@
 import React from "react"
-import { Button, ConfigProvider, DatePicker, Pagination } from "antd"
-import zhCN from "antd/es/locale/zh_CN"
-
-function App() {
-  // 设置的是所有 antd 组件的配置
-  const myConfig = {
-    autoInsertSpaceInButton: false,
-    locale: zhCN
-  }
-  const onChange = (date, dateString) => {
-    console.log(date, dateString)
-  }
-  const changePage = (page, pageSize) => {
-    console.log(page, pageSize)
-  }
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts"
+const App = () => {
+  const data = [
+    { name: "Page A", uv: 400, pv: 2400, amt: 2400 },
+    { name: "Page B", uv: 300, pv: 2500, amt: 2400 },
+    { name: "Page C", uv: 100, pv: 1600, amt: 2400 },
+    { name: "Page D", uv: 350, pv: 2200, amt: 2400 },
+    { name: "Page E", uv: 200, pv: 1800, amt: 2400 }
+  ]
   return (
-    <ConfigProvider {...myConfig}>
-      <div className='App'>
-        <h1>React UI</h1>
-        <Button type='primary' ghost>
-          按钮
-        </Button>
-        <Button
-          onClick={() => console.log("搜索")}
-          type='primary'
-          shape='circle'
-          icon='search'
-        />
-        <DatePicker onChange={onChange} />
-        <Pagination
-          onChange={changePage}
-          defaultCurrent={1}
-          total={100}
-          pageSizeOptions={["10", "20", "30", "40"]}
-        />
-      </div>
-    </ConfigProvider>
+    <div>
+      <LineChart
+        width={600}
+        height={300}
+        data={data}
+        margin={{ top: 50, right: 20, bottom: 5, left: 0 }}
+      >
+        <Line activeDot={{ r: 8 }} type='monotone' dataKey='uv' stroke='#ccc' />
+        <CartesianGrid stroke='#ccc' strokeDasharray='10 10' />
+        <XAxis dataKey='name' />
+        <YAxis />
+        <Tooltip />
+      </LineChart>
+    </div>
   )
 }
 export default App
