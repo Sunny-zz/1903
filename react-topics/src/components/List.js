@@ -1,14 +1,21 @@
 import React, { Component } from "react"
 import { NavLink } from "react-router-dom"
+import axios from "axios"
 class List extends Component {
   state = {
-    type: "all"
+    topics: []
   }
   componentDidMount() {
     // console.log(this.props)
     const { search } = this.props.location
-    this.setState({
-      type: search ? search.replace("?tab=", "") : "all"
+    // this.setState({
+    //   type: search ? search.replace("?tab=", "") : "all"
+    // })
+    const type = search ? search.replace("?tab=", "") : "all"
+    axios.get(`http://localhost:3008/topics/?tab=${type}`).then(res => {
+      this.setState({
+        topics: res.data
+      })
     })
   }
   componentDidUpdate(prevProps) {
@@ -18,12 +25,33 @@ class List extends Component {
       // ?tab=good   ====>  good
       //
       this.setState({
-        type: search.replace("?tab=", "")
+        topics: []
+      })
+      const type = search.replace("?tab=", "")
+      axios.get(`http://localhost:3008/topics/?tab=${type}`).then(res => {
+        setTimeout(() => {
+          this.setState({
+            topics: res.data
+          })
+        }, 500)
       })
     }
   }
   render() {
     const { search } = this.props.location
+    const { topics } = this.state
+    const list = topics.length ? (
+      <ul>
+        {topics.map(topic => (
+          <li key={topic.id}>
+            <NavLink to={`/topic/${topic.id}`}>{topic.title}</NavLink>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div>请稍等</div>
+    )
+
     return (
       <div>
         <ul
@@ -61,7 +89,7 @@ class List extends Component {
             </NavLink>
           </li>
         </ul>
-        <div>对应{this.state.type}类别的列表</div>
+        <div>{list}</div>
       </div>
     )
   }
