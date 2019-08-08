@@ -1,12 +1,21 @@
 import React, { Component } from "react"
 import "./header.scss"
+import { Link, withRouter } from "react-router-dom"
 import styled from "styled-components"
 class Header extends Component {
   state = {}
   render() {
     return (
       <header>
-        <img src='https://www.vue-js.com/public/images/vue.png' alt='' />
+        {/* <Link to='/'>
+          <img src='https://www.vue-js.com/public/images/vue.png' alt='' />
+          <Span>中文社区</Span>
+        </Link> */}
+        <img
+          onClick={() => this.props.history.push("/")}
+          src='https://www.vue-js.com/public/images/vue.png'
+          alt=''
+        />
         <Span>中文社区</Span>
       </header>
     )
@@ -20,4 +29,4 @@ const Span = styled.span`
   }
 `
 
-export default Header
+export default withRouter(Header)
