@@ -1,6 +1,7 @@
 import React from "react"
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts"
 import RechartsDemo from "./components/RechartsDemo"
+import EchartsDemo from "./components/EchartsDemo"
 
 const App = () => {
   const data = [
@@ -12,7 +13,7 @@ const App = () => {
   ]
   return (
     <div>
-      <LineChart
+      {/* <LineChart
         width={600}
         height={300}
         data={data}
@@ -23,8 +24,9 @@ const App = () => {
         <XAxis dataKey='name' />
         <YAxis />
         <Tooltip />
-      </LineChart>
-      <RechartsDemo />
+      </LineChart> */}
+      {/* <RechartsDemo /> */}
+      <EchartsDemo />
     </div>
   )
 }
