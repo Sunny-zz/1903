@@ -1,0 +1,7 @@
+.swiper-container {
+  margin: 0;
+}
+.swiper-slide > img {
+  width: 100%;
+  display: block;
+}
