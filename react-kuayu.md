@@ -17,13 +17,16 @@
 2. 高于 2.0 版本
    建立 src/setupProxy.js 文件，npm 安装 install http-proxy-middleware , 配置成如下：(可配置多个代理)
    ```js
-   const proxy = require(“http-proxy-middleware”);
+   const proxy = require("http-proxy-middleware")
    module.exports = function(app) {
-    app.use(
-      proxy("/base/", {
-        target: “http://45.32.15.21:8090/”,
-        changeOrigin: true
-      })
-    );
-   };
+     app.use(
+       proxy("/api", {
+         target: "https://www.wanandroid.com",
+         changeOrigin: true,
+         pathRewrite: {
+           "^/api": ""
+         }
+       })
+     )
+   }
    ```
