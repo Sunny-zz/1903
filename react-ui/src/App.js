@@ -1,5 +1,7 @@
 import React from "react"
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts"
+import RechartsDemo from "./components/RechartsDemo"
+
 const App = () => {
   const data = [
     { name: "Page A", uv: 400, pv: 2400, amt: 2400 },
@@ -22,6 +24,7 @@ const App = () => {
         <YAxis />
         <Tooltip />
       </LineChart>
+      <RechartsDemo />
     </div>
   )
 }
