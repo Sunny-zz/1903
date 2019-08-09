@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { PieChart, Pie, Sector, Tooltip, Cell } from "recharts"
+import { PieChart, Pie, Sector, Tooltip, Cell, Legend } from "recharts"
 
 const data = [
   { name: "4k-6k", value: 10 },
@@ -24,11 +24,11 @@ const renderActiveShape = props => {
   } = props
   const sin = Math.sin(-RADIAN * midAngle)
   const cos = Math.cos(-RADIAN * midAngle)
-  const sx = cx + (outerRadius + 10) * cos
-  const sy = cy + (outerRadius + 10) * sin
-  const mx = cx + (outerRadius + 30) * cos
-  const my = cy + (outerRadius + 30) * sin
-  const ex = mx + (cos >= 0 ? 1 : -1) * 22
+  const sx = cx + outerRadius * cos
+  const sy = cy + outerRadius * sin
+  const mx = cx + (outerRadius + 20) * cos
+  const my = cy + (outerRadius + 20) * sin
+  const ex = mx + (cos >= 0 ? 1 : -1) * 20
   const ey = my
   const textAnchor = cos >= 0 ? "start" : "end"
 
@@ -62,8 +62,8 @@ const renderActiveShape = props => {
       />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke='none' />
       <text
-        x={ex + (cos >= 0 ? 1 : -1) * 12}
-        y={ey}
+        x={ex + (cos >= 0 ? 1 : -1) * 8}
+        y={ey + 5}
         textAnchor={textAnchor}
         fill='#333'
       >{`${name}`}</text>
@@ -87,8 +87,8 @@ export default class RechartsDemo extends Component {
       <PieChart width={400} height={400}>
         <Pie
           // label
-          activeIndex={this.state.activeIndex}
-          activeShape={renderActiveShape}
+          // activeIndex={this.state.activeIndex}
+          label={renderActiveShape}
           data={data}
           cx={200}
           cy={200}
@@ -96,13 +96,14 @@ export default class RechartsDemo extends Component {
           outerRadius={80}
           fill='#8884d8'
           dataKey='value'
-          onMouseEnter={this.onPieEnter}
+          // onMouseEnter={this.onPieEnter}
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index]} />
           ))}
         </Pie>
-        <Tooltip />
+        {/* <Tooltip /> */}
+        <Legend align='right' layout='vertical' />
       </PieChart>
     )
   }
