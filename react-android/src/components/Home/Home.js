@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Route, NavLink } from "react-router-dom"
 import MySwiper from "../MySwiper/MySwiper"
-import axios from "axios"
+
 import ContentList from "../ContentList/ContentList"
 
 class Home extends Component {
@@ -11,6 +11,7 @@ class Home extends Component {
   //     console.log(res.data)
   //   })
   // }
+
   render() {
     const swiperOne = {
       pics: [
@@ -39,7 +40,7 @@ class Home extends Component {
       position: "right"
     }
     return (
-      <div className='home'>
+      <div onScroll={this.handleScroll} className='home'>
         <div style={{ overflow: "hidden" }} className='top'>
           {/* 双轮播图，单独把一个轮播图写成一个组件 */}
           <MySwiper {...swiperOne} />
