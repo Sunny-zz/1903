@@ -3,6 +3,7 @@ import { Route, NavLink } from "react-router-dom"
 import MySwiper from "../MySwiper/MySwiper"
 
 import ContentList from "../ContentList/ContentList"
+import ContentListCopy from "../ContentListCopy/ContentListCopy"
 
 class Home extends Component {
   state = {}
@@ -52,8 +53,8 @@ class Home extends Component {
             <span>|</span>
             <NavLink to='/pindex'>最新项目</NavLink>
           </div>
-          <Route path='/' exact component={ContentList} />
-          <Route path='/:type' component={ContentList} />
+          <Route path='/' exact component={ContentListCopy} />
+          <Route path='/:type' component={ContentListCopy} />
         </div>
       </div>
     )
