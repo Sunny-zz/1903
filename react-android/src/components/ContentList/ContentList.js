@@ -3,10 +3,12 @@ import axios from "axios"
 class ContentList extends Component {
   state = {
     list: [],
-    pageNum: 0
+    pageNum: 0,
+    showLoading: false
   }
   componentDidMount() {
     const { type } = this.props.match.params
+    console.log(type)
     axios
       .get(`/api/article/${type === "index" ? "list" : "listproject"}/0/json`)
       .then(res => {
@@ -28,9 +30,12 @@ class ContentList extends Component {
           window.innerHeight <
         20
       ) {
-        this.setState({
-          pageNum: this.state.pageNum + 1
-        })
+        if (this.state.showLoading === false) {
+          this.setState({
+            pageNum: this.state.pageNum + 1,
+            showLoading: true
+          })
+        }
       }
     }
   }
@@ -45,14 +50,17 @@ class ContentList extends Component {
           }/${pageNum}/json`
         )
         .then(res => {
-          this.setState({
-            list: [...list, ...res.data.data.datas]
-          })
+          setTimeout(() => {
+            this.setState({
+              list: [...list, ...res.data.data.datas],
+              showLoading: false
+            })
+          }, 1000)
         })
     }
   }
   render() {
-    const { list, pageNum } = this.state
+    const { list, pageNum, showLoading } = this.state
     console.log(pageNum)
     const contentList = list.length ? (
       <ul>
@@ -63,7 +71,14 @@ class ContentList extends Component {
     ) : (
       "请稍等"
     )
-    return <div>{contentList}</div>
+    return (
+      <div>
+        {contentList}
+        <div style={{ display: showLoading ? "block" : "none" }}>
+          加载中......
+        </div>
+      </div>
+    )
   }
 }
 export default ContentList

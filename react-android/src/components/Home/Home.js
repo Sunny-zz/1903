@@ -52,6 +52,7 @@ class Home extends Component {
             <span>|</span>
             <NavLink to='/pindex'>最新项目</NavLink>
           </div>
+          <Route path='/' exact component={ContentList} />
           <Route path='/:type' component={ContentList} />
         </div>
       </div>
