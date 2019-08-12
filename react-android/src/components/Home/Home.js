@@ -1,13 +1,16 @@
 import React, { Component } from "react"
+import { Route, NavLink } from "react-router-dom"
 import MySwiper from "../MySwiper/MySwiper"
 import axios from "axios"
+import ContentList from "../ContentList/ContentList"
+
 class Home extends Component {
   state = {}
-  componentDidMount() {
-    axios.get("/api/banner/json").then(res => {
-      console.log(res.data)
-    })
-  }
+  // componentDidMount() {
+  //   axios.get("/api/banner/json").then(res => {
+  //     console.log(res.data)
+  //   })
+  // }
   render() {
     const swiperOne = {
       pics: [
@@ -18,7 +21,8 @@ class Home extends Component {
       width: 578,
       height: 280,
       slidesPerView: 1,
-      className: "swiperOne"
+      className: "swiperOne",
+      position: "left"
     }
     const swiperTwo = {
       pics: [
@@ -31,14 +35,23 @@ class Home extends Component {
       width: 290,
       height: 280,
       slidesPerView: 2,
-      className: "swiperTwo"
+      className: "swiperTwo",
+      position: "right"
     }
     return (
       <div className='home'>
-        <div className='top'>
+        <div style={{ overflow: "hidden" }} className='top'>
           {/* 双轮播图，单独把一个轮播图写成一个组件 */}
           <MySwiper {...swiperOne} />
           <MySwiper {...swiperTwo} />
+        </div>
+        <div className='content'>
+          <div className='content-nav'>
+            <NavLink to='/index'>最新博文</NavLink>
+            <span>|</span>
+            <NavLink to='/pindex'>最新项目</NavLink>
+          </div>
+          <Route path='/:type' component={ContentList} />
         </div>
       </div>
     )

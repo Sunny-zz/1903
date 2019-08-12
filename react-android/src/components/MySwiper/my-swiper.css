@@ -5,3 +5,15 @@
   width: 100%;
   display: block;
 }
+.arrow-prev,
+.arrow-next {
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+}
+.arrow-prev {
+  top: 20px;
+}
+.arrow-next {
+  top: auto;
+  bottom: 0;
+}

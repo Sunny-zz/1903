@@ -10,6 +10,7 @@ class Main extends Component {
       <div className='main'>
         <Route path='/' exact component={Home} />
         <Route path='/index' component={Home} />
+        <Route path='/pindex' component={Home} />
         <Route path='/projectindex' component={ProjectIndex} />
         <Route path='/tree' component={Tree} />
       </div>
