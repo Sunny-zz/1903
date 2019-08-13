@@ -18,9 +18,9 @@ class MySwiper extends Component {
     })
   }
   render() {
-    const { pics, width, height, className } = this.props
+    const { pics, width, height, className, position } = this.props
     return (
-      <div className='my-swiper'>
+      <div style={{ float: "left" }} className='my-swiper'>
         <div
           style={{ width, height }}
           className={`swiper-container ${className}`}
@@ -32,8 +32,20 @@ class MySwiper extends Component {
               </div>
             ))}
           </div>
-          <div className='swiper-button-prev' />
-          <div className='swiper-button-next' />
+          <div
+            className={
+              position === "right"
+                ? "arrow-prev swiper-button-prev"
+                : "swiper-button-prev"
+            }
+          />
+          <div
+            className={
+              position === "right"
+                ? "arrow-next swiper-button-next"
+                : "swiper-button-next"
+            }
+          />
         </div>
       </div>
     )

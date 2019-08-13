@@ -19,7 +19,9 @@ class Header extends Component {
           <ul className='nav'>
             <li>
               <NavLink
-                className={pathname === "/" ? "active" : ""}
+                className={
+                  pathname === "/" || pathname === "/pindex" ? "active" : ""
+                }
                 exact
                 activeClassName='active'
                 to='/index'
