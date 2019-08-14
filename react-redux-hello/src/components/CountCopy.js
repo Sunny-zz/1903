@@ -1,8 +1,8 @@
 import React, { Component } from "react"
-import store from "../store"
+import { connect } from "react-redux"
 class CountCopy extends Component {
   render() {
-    const { count } = store.getState()
+    const { count } = this.props
     return (
       <div>
         <h2>组件2</h2>
@@ -13,4 +13,9 @@ class CountCopy extends Component {
     )
   }
 }
-export default CountCopy
+const mapStateToProps = state => {
+  return {
+    count: state.count
+  }
+}
+export default connect(mapStateToProps)(CountCopy)

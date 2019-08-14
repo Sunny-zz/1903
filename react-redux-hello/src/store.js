@@ -8,9 +8,8 @@ import logger from "redux-logger"
 // redux 的中间件  redux-logger 作用是当你更改 store 中的数据的时候，帮你在控制台输出记录
 // 如何使用  需要在 redux 中导出一个方法 applyMiddleware 在创建 store 的时候使用该方法给 store 添加上中间件功能
 const inititalState = {
-  count: 10,
-  a: 100,
-  b: 200
+  count: 100,
+  address: null
 }
 // action 相当与之前 vue 的 mutation
 // action 类型需要写成大写的
@@ -22,8 +21,25 @@ const rootReducer = (state = inititalState, action) => {
   switch (action.type) {
     case "ADD":
       // 不可以对 state 直接进行修改   原因是由于 redux 要求不变性()
+      // 保证不修改原来的 state 返回新的 state
+      return { ...state, count: state.count + 1 }
+    case "SUB":
+      return { ...state, count: state.count - 1 }
+    case "CHANGE":
       return {
-        count: state.count + 1
+        ...state,
+        count: action.newCount
+      }
+    case "GETADDRESS":
+      return {
+        ...state,
+        address: action.newAddress
+      }
+    case "UPDATEADDRESS":
+      const { newAddress } = action
+      return {
+        ...state,
+        address: { ...state.address, ...newAddress }
       }
     default:
       return state
