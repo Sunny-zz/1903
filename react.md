@@ -96,6 +96,46 @@
    - 直接把组件的样式写在 行内
    - 使用 styled-components 包解决
 
+###### Redux
+
+- 安装
+
+  - npm i redux
+
+- 创建
+
+  - 创建 src/store.js
+  - 在 store.js 内
+    ```js
+    import { createStore } from "redux"
+    const inititalState = { count: 10 }
+    const rootReducer = (state = inititalState) => {
+      return state
+    }
+    const store = createStore(rootReducer)
+    export default store
+    ```
+
+- 静态获取
+
+  - 在组件内 导入 store 使用 store.getState()
+
+- 修改 store
+  - 在 store.js 内的 reducer 函数内
+  ```js
+  const rootReducer = (state = inititalState,action) => {
+    switch (action.type) {
+      case "ADD":
+        console.log("触发了 ADD 类型的 action")
+        state.count = state.count + 1
+        return state
+      default:
+        // state 的初始值  相当于最开始 vuex 内的 state
+        return state
+    }
+  }
+  ```
+
 ###### react 项目启动修改 port
 
 ```json
