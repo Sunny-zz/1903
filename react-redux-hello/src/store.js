@@ -1,10 +1,16 @@
 // 在 redux 包内导出一个方法 createStore 用来创建 store
-import { createStore } from "redux"
+import { createStore, applyMiddleware } from "redux"
+import logger from "redux-logger"
 // createStore 方法需要接收一个函数作为参数  该函数被叫做 reducer 函数
 // reducer 函数会默认接收一个 state 作为参数，给该参数赋的值就是原始的 state，并且把该参数返回(return)
 // 这样 createStore 方法执行的时候就会创建一个 store 了，reducer 函数内的 state 参数就是共享的 state，也就是 store 中的数据
+
+// redux 的中间件  redux-logger 作用是当你更改 store 中的数据的时候，帮你在控制台输出记录
+// 如何使用  需要在 redux 中导出一个方法 applyMiddleware 在创建 store 的时候使用该方法给 store 添加上中间件功能
 const inititalState = {
-  count: 10
+  count: 10,
+  a: 100,
+  b: 200
 }
 // action 相当与之前 vue 的 mutation
 // action 类型需要写成大写的
@@ -15,13 +21,14 @@ const inititalState = {
 const rootReducer = (state = inititalState, action) => {
   switch (action.type) {
     case "ADD":
-      console.log("触发了 ADD 类型的 action")
-      state.count = state.count + 1
-      return state
+      // 不可以对 state 直接进行修改   原因是由于 redux 要求不变性()
+      return {
+        count: state.count + 1
+      }
     default:
       return state
   }
 }
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(logger))
 export default store
 // export default createStore((state={count:0})=> state)

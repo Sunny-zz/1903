@@ -3,8 +3,8 @@ import store from "../store"
 class Count extends Component {
   render() {
     // 如何获取 store 内的数据
-    console.log(store.getState())
-    const { count } = store.getState()
+
+    const { count } = this.props
     return (
       <div>
         <h2>组件1</h2>
