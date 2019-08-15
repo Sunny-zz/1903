@@ -2,13 +2,13 @@
   "posts": [
     {
       "id": "1",
-      "title": "w3123",
-      "content": "<div>3213</div>"
+      "title": "react",
+      "content": "<div>react 666</div>"
     },
     {
       "id": "2",
-      "title": "w3121323",
-      "content": "<div>32131231233</div>"
+      "title": "vue",
+      "content": "<div>vue 888</div>"
     }
   ],
   "comments": [
@@ -51,11 +51,6 @@
       "text": "7",
       "postId": "1",
       "id": "FcTKaph"
-    },
-    {
-      "text": "8",
-      "postId": "1",
-      "id": "Ch2Eefy"
     },
     {
       "text": "9",

@@ -21,12 +21,20 @@ class PostComment extends Component {
       })
     }
   }
+  delComment = id => {
+    Axios.delete(`http://localhost:3008/comments/${id}`).then(res => {
+      store.dispatch({ type: "DELCOMMENT", id })
+    })
+  }
   render() {
     const { comments } = this.props
     const commentList = comments.length ? (
       <ul>
         {comments.map(comment => (
-          <li key={comment.id}>{comment.text}</li>
+          <li key={comment.id}>
+            {comment.text}
+            <button onClick={() => this.delComment(comment.id)}>删除</button>
+          </li>
         ))}
       </ul>
     ) : (

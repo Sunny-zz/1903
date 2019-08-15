@@ -5,7 +5,6 @@ const initialState = {
   posts: [],
   comments: []
 }
-
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GETPOSTS":
@@ -22,6 +21,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         comments: [action.newComment, ...state.comments]
+      }
+    case "DELCOMMENT":
+      return {
+        ...state,
+        comments: state.comments.filter(comment => comment.id !== action.id)
       }
     default:
       return state
