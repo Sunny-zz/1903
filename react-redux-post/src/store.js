@@ -21,7 +21,7 @@ const rootReducer = (state = initialState, action) => {
     case "ADDCOMMENT":
       return {
         ...state,
-        comments: [...state.comments, action.newComment]
+        comments: [action.newComment, ...state.comments]
       }
     default:
       return state

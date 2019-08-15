@@ -15,7 +15,10 @@ class Post extends Component {
       })
     })
     Axios.get(`http://localhost:3008/comments?postId=${id}`).then(res => {
-      this.props.dispatch({ type: "GETCOMMENTS", newComments: res.data })
+      this.props.dispatch({
+        type: "GETCOMMENTS",
+        newComments: res.data.reverse()
+      })
     })
   }
   render() {

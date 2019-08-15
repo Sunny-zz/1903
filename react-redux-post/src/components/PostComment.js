@@ -37,6 +37,11 @@ class PostComment extends Component {
         <h4>评论</h4>
         {commentList}
         <textarea
+          onKeyDown={event => {
+            if (event.which === 13) {
+              this.addComment()
+            }
+          }}
           value={this.state.val}
           onChange={event =>
             this.setState({
