@@ -3,6 +3,7 @@ import PostBody from "./PostBody"
 import PostComment from "./PostComment"
 import Axios from "axios"
 import { connect } from "react-redux"
+import { getComments } from "../store/actions"
 class Post extends Component {
   state = {
     post: null
@@ -14,12 +15,7 @@ class Post extends Component {
         post: res.data
       })
     })
-    Axios.get(`http://localhost:3008/comments?postId=${id}`).then(res => {
-      this.props.dispatch({
-        type: "GETCOMMENTS",
-        newComments: res.data.reverse()
-      })
-    })
+    this.props.getComments(id)
   }
   render() {
     const { post } = this.state
@@ -38,4 +34,7 @@ const mapStateToProps = state => {
     comments: state.comments
   }
 }
-export default connect(mapStateToProps)(Post)
+export default connect(
+  mapStateToProps,
+  { getComments }
+)(Post)

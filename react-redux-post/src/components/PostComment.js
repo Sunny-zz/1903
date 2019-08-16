@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import Axios from "axios"
-import store from "../store"
+import { connect } from "react-redux"
+import { addComment } from "../store/actions"
 class PostComment extends Component {
   state = {
     val: ""
@@ -10,22 +10,14 @@ class PostComment extends Component {
     // 2. 将网上更新好的在本地展示
     const { val } = this.state
     if (val.trim()) {
-      Axios.post("http://localhost:3008/comments", {
-        text: val,
-        postId: this.props.postId
-      }).then(res => {
-        store.dispatch({ type: "ADDCOMMENT", newComment: res.data })
-        this.setState({
-          val: ""
-        })
-      })
+      this.props.addComment({ text: val, postId: this.props.postId }, () =>
+        this.setState({ val: "" })
+      )
     }
   }
-  delComment = id => {
-    Axios.delete(`http://localhost:3008/comments/${id}`).then(res => {
-      store.dispatch({ type: "DELCOMMENT", id })
-    })
-  }
+  // delComment = id => {
+
+  // }
   render() {
     const { comments } = this.props
     const commentList = comments.length ? (
@@ -62,4 +54,7 @@ class PostComment extends Component {
     )
   }
 }
-export default PostComment
+export default connect(
+  null,
+  { addComment }
+)(PostComment)
