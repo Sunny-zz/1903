@@ -1,13 +1,9 @@
-const initialState = [
-  {
-    id: "1",
-    name: "iphone 12",
-    price: 9999,
-    inventory: 100
-  }
-]
-export default (state = initialState, action) => {
+import { GET_PRODUCTS } from "../actionTypes"
+
+export default (state = [], action) => {
   switch (action.type) {
+    case GET_PRODUCTS:
+      return action.newProducts
     default:
       return state
   }
