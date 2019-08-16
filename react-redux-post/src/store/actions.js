@@ -1,4 +1,9 @@
-import { GET_POSTS, GET_COMMENTS, ADD_COMMENT } from "./actionTypes"
+import {
+  GET_POSTS,
+  GET_COMMENTS,
+  ADD_COMMENT,
+  DEL_COMMENT
+} from "./actionTypes"
 import Axios from "axios"
 // 创建一个异步的 action ，必须搭配 redux-thunk  或 redux-saga 使用
 // 普通的 action 函数需要返回一个对象 {type: xxx,xxxx}
@@ -22,4 +27,9 @@ const addComment = (newComment, callBack) => dispatch => {
     callBack()
   })
 }
-export { getPosts, getComments, addComment }
+const delComment = id => dispatch => {
+  Axios.delete(`http://localhost:3008/comments/${id}`).then(res => {
+    dispatch({ type: DEL_COMMENT, id })
+  })
+}
+export { getPosts, getComments, addComment, delComment }

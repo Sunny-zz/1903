@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { addComment } from "../store/actions"
+import { addComment, delComment } from "../store/actions"
 class PostComment extends Component {
   state = {
     val: ""
@@ -15,9 +15,9 @@ class PostComment extends Component {
       )
     }
   }
-  // delComment = id => {
-
-  // }
+  delComment = id => {
+    this.props.delComment(id)
+  }
   render() {
     const { comments } = this.props
     const commentList = comments.length ? (
@@ -56,5 +56,5 @@ class PostComment extends Component {
 }
 export default connect(
   null,
-  { addComment }
+  { addComment, delComment }
 )(PostComment)
