@@ -1,8 +1,9 @@
 import React, { Component } from "react"
-import { productsInCart } from "../store/selectors"
+import { productsInCart, total } from "../store/selectors"
+
 class Cart extends Component {
   render() {
-    const { cart, products } = this.props
+    const { cart, products, addToCart, subToCart } = this.props
 
     // const content =
     //   products.length && cart.productIdsInCart.length ? (
@@ -32,13 +33,21 @@ class Cart extends Component {
             <span>{item.name}</span>
             &nbsp;&nbsp;&nbsp;
             <span>买了{item.num}个</span>
+            <br />
+            <button onClick={() => addToCart(item.id)}>+</button>
+            <button onClick={() => subToCart(item.id)}>-</button>
           </li>
         ))}
       </ul>
     ) : (
       "请添加商品"
     )
-    return <div>{content}</div>
+    return (
+      <div>
+        {content} <br />
+        <span>总价:{total(cart, products)} </span>
+      </div>
+    )
   }
 }
 export default Cart

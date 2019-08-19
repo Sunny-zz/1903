@@ -9,7 +9,14 @@ const productsInCart = (cart, products) => {
       })
     : []
 }
-export { productsInCart }
+
+const total = (cart, products) => {
+  return productsInCart(cart, products).reduce(
+    (res, ele) => res + ele.price * ele.num,
+    0
+  )
+}
+export { productsInCart, total }
 // [
 //   {
 //     id: "1",
