@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>webpack 搭建 vue 开发环境</h1>
+    <h1>webpack 搭建1 vue 开发环境</h1>
     <Home />
   </div>
 </template>
@@ -13,9 +13,15 @@ export default {
   name: "app",
   components: {
     Home
+  },
+  created() {
+    console.log(10);
   }
 };
 </script>
 
-<style>
+<style scoped  >
+h1 {
+  color: greenyellow;
+}
 </style>
