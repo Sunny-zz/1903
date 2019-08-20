@@ -1,14 +1,14 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
-import { getPosts } from "../store/actions"
-import { bindActionCreators } from "redux"
+// import { getPosts } from "../store/actions"
+// import { bindActionCreators } from "redux"
 
 class Home extends Component {
-  componentDidMount() {
-    // 组件内没有发出 action
-    this.props.getPosts()
-  }
+  // componentDidMount() {
+  //   // 组件内没有发出 action
+  //   this.props.getPosts()
+  // }
   render() {
     const { posts } = this.props
     console.log(this.props)
@@ -33,11 +33,11 @@ const mapStateToProps = state => {
     posts: state.posts
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    getPosts: bindActionCreators(getPosts, dispatch)
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     getPosts: bindActionCreators(getPosts, dispatch)
+//   }
+// }
 // 可以利用 mapDispatchToProps 将 action 创建函数附带上 dispatch 功能，这样的意思就是直接执行 action 创建函数默认触发 dispatch
 // 下面的写法是 mapDispatchToProps 的语法糖
 // 普通写法 参考 6 41-45 54-57
@@ -54,6 +54,6 @@ const mapDispatchToProps = dispatch => {
 
 // 这样会把该 action 创建函数重新整理(带了 dispatch 会自动发 action)并且放到组件的 props 内
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
+  // mapDispatchToProps
 )(Home)
