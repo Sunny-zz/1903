@@ -1,0 +1,11 @@
+<!-- pages/index/index.wxml -->
+<text>实现小程序的用户信息获取</text>
+<!-- 1. 直接在app.js 内的 onLoad 方法内直接使用 wx.getUserInfo() 就能获取，会弹出授权窗口。但是此种方法即将要被淘汰 -->
+<!-- 2. 使用 button 按钮(需要设置 open-type='getUserInfo')，让用户点击弹出授权窗口 -->
+<image wx:if="{{userInfo}}" src="{{userInfo.avatarUrl}}" />
+<button open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取用户信息</button>
+<view>
+  <block wx:for="{{posts}}" wx:key="{{item.id}}">
+    <view>{{item.title}}</view>
+  </block>
+</view>

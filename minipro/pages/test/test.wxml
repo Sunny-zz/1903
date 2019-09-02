@@ -4,3 +4,4 @@
     <view>{{item}}</view>
   </block>
 </view>
+<button size="mini" bind:tap="push">下拉刷新</button>

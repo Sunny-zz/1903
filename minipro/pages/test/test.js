@@ -6,7 +6,9 @@ Page({
   data: {
     arr: [1, 2, 3, 4, 5]
   },
-
+  push() {
+    wx.startPullDownRefresh()
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -44,9 +46,20 @@ Page({
       newArr.push(arr[random])
       arr.splice(random, 1)
     }
-    this.setData({
-      arr: newArr
-    })
+    setTimeout(() => {
+      this.setData({
+        arr: newArr
+      })
+      wx.stopPullDownRefresh()
+    }, 500)
+    // wx.showNavigationBarLoading({
+    //   success() {
+    //     setTimeout(() => {
+    //       wx.hideNavigationBarLoading()
+    //       wx.stopPullDownRefresh()
+    //     }, 300)
+    //   }
+    // })
   },
 
   /**
