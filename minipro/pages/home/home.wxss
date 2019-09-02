@@ -1,0 +1,46 @@
+/* pages/home/home.wxss */
+.btn {
+  background-color: blue;
+}
+/* 小程序将整个屏幕的宽度设计成了  750rpx  */
+.scroll-view {
+  height: 100px;
+}
+.test {
+  width: 375rpx;
+  height: 20px;
+  background-color: red;
+}
+.swiper-box {
+  width: 750rpx;
+  height: 562.5rpx;
+  position: relative;
+}
+.swiper {
+  width: 750rpx;
+  height: 562.5rpx;
+}
+.swiper image {
+  width: 750rpx;
+  height: 562.5rpx;
+}
+.swiper-dots {
+  position: absolute;
+  display: flex;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 4px;
+  /* z-index: 100; */
+}
+.swiper-dots > view {
+  width: 100rpx;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-right: 2px;
+}
+.swiper-dots > view:last-child {
+  margin-right: 0;
+}
+.swiper-dots > view.active {
+  background-color: #fff;
+}

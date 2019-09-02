@@ -1,0 +1,12 @@
+/* pages/test/test.wxss */
+.box {
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+}
+.box view {
+  background-color: #ccc;
+  width: 110rpx;
+  text-align: center;
+  line-height: 80px;
+}

@@ -1,0 +1,23 @@
+.fade-enter {
+  margin-left: -100%;
+}
+.fade-enter-active {
+  margin-left: 0;
+  transition: margin-left 200ms;
+}
+.fade-enter-done {
+  display: block;
+}
+.fade-exit {
+  margin-left: 0;
+}
+.fade-exit-active {
+  margin-left: 100%;
+  transition: margin-left 200ms;
+}
+.fade-exit-done {
+  display: block;
+}
+.text {
+  white-space: nowrap;
+}

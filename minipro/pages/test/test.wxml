@@ -1,0 +1,6 @@
+<!-- pages/test/test.wxml -->
+<view class="box">
+  <block wx:for="{{arr}}" wx:key="{{item}}">
+    <view>{{item}}</view>
+  </block>
+</view>

@@ -1,0 +1,42 @@
+<!-- pages/about/about.wxml -->
+<view>
+  <text class="about">js逻辑</text>
+</view>
+<view>
+  <!-- count 是 js 内的 data 可以直接使用  模板语法就是 {{}} -->
+  <text>{{count ? "true" : "false"}}</text>
+  <br></br>
+</view>
+<!-- 事件绑定  使用  bind:tap  绑定   值不用写双花括号 直接使用后面 js 内定义好的方法即可 -->
+<button bind:tap="add" size="mini">按钮 add</button>
+<view>
+  <text>{{count + 10 }}</text>
+</view>
+<button bind:tap="change">出现</button>
+<view style="display: {{show? 'block': 'none'}}" class="box"></view>
+<view wx:if="{{show}}" class="box"></view>
+<view>
+  <text>列表渲染</text>
+  <input type="text" bindinput="bindInput" style="border: 1px solid #ccc;" value="{{val}}" />
+  <!-- 如何获取input输入的内容 -->
+  <!-- 1. 给组件绑定 bindInput 事件 -->
+  <!-- 2. 事件内使用 e.detail.value 获取输入的内容 用该内容去修改你的 data -->
+  <button size="mini" bind:tap="addComment">添加评论</button>
+  <view wx:key="{{comment.id}}" wx:for="{{comments}}" wx:for-item="comment">
+    <text>{{comment.text}}</text>
+    <!-- 事件传递参数需要将你的参数写到事件对象下 -->
+    <!-- 给该标签添加一个 data-xxx 属性，你的事件对象 e.currentTarget.dataset 对象下就会多一个 xxx 属性 -->
+    <!-- data-item-id  e.currentTarget.dataset.itemId -->
+    <!-- data-itemId  e.currentTarget.dataset.itemid -->
+    <button size="mini" data-id="{{comment.id}}" bind:tap="delComment">删除</button>
+  </view>
+</view>
+<view>
+  <text>产品推荐</text>
+</view>
+<view>
+  <block wx:key="{{item}}" wx:for="{{arr}}">
+    <view class="product">{{item}}</view>
+  </block>
+</view>
+<view class="loading">要旅游，找途牛</view>

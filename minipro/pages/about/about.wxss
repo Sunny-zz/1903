@@ -1,0 +1,23 @@
+/* pages/about/about.wxss */
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
+}
+.product {
+  width: 750rpx;
+  height: 200rpx;
+  background-color: #ccc;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading {
+  width: 750rpx;
+  height: 200rpx;
+  background-color: red;
+  font-size: 50px;
+  text-align: center;
+  line-height: 200rpx;
+}

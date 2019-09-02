@@ -24,7 +24,7 @@ module.exports = merge(common, {
     historyApiFallback: true
   },
 
-  // module 各种其他模块的配置(包括一些不支持的语法象 vue  react 框架语法)
+  // module 各种其他模块的配置(包括一些不支持的，语法象 vue  react 框架语法)
   module: {
     // rules 代表规则
     // rules 下面每一条针对的就是一条模块的转化规则
