@@ -4,6 +4,12 @@
 <!-- 2. 使用 button 按钮(需要设置 open-type='getUserInfo')，让用户点击弹出授权窗口 -->
 <image wx:if="{{userInfo}}" src="{{userInfo.avatarUrl}}" />
 <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取用户信息</button>
+<my-button size="default" text="登录"></my-button>
+<my-button bind:handlebtn="handleBtn" text="注册"></my-button>
+<wrap>
+  <text>布局组件内的结构</text>
+  <text>111221</text>
+</wrap>
 <view>
   <block wx:for="{{posts}}" wx:key="{{item.id}}">
     <view>{{item.title}}</view>

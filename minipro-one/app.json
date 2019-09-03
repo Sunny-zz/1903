@@ -1,10 +1,15 @@
 {
-  "pages": ["pages/index/index"],
+  "pages": ["pages/index/index", "pages/home/home"],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你管我干啥呢"
+    }
+  }
 }

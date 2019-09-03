@@ -1,0 +1,2 @@
+<!-- components/button.wxml -->
+<button bind:tap="handleClick" size="{{size}}" class="btn">{{text}}</button>

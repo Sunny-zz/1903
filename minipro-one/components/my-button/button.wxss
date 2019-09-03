@@ -1,0 +1,4 @@
+/* components/button.wxss */
+.btn {
+  background-color: #00b3d4;
+}

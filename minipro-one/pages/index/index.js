@@ -2,6 +2,7 @@
 // 使用公共的 data  app.js 内的 globalData
 // 获取整个小程序的实例 app.js 内的相关设置
 const app = getApp()
+import { fun } from "../../utils/util"
 Page({
   /**
    * 页面的初始数据
@@ -49,7 +50,10 @@ Page({
       }
     })
   },
-
+  handleBtn() {
+    console.log(fun(100, 200))
+    console.log("点击了自定义组件 button")
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
