@@ -18,7 +18,7 @@ Page({
     wx.request({
       url: `https://api.map.baidu.com/geocoding/v3/?address=${e.detail.value.join(
         ""
-      )}&ak=pFhG396mvlXqus9ltZWFDzke4B9gpH2h`,
+      )}&ak=pFhG396mvlXqus9ltZWFDzke4B9gpH2h&output=json`,
       method: "GET",
       success: res => {
         console.log(res)
@@ -26,7 +26,7 @@ Page({
         this.BMap.weather({
           fail: this.fail,
           success: this.success,
-          location: `${res.location.lng},${res.location.lat}`
+          location: `${res.data.result.location.lng},${res.data.result.location.lat}`
         })
       }
     })
