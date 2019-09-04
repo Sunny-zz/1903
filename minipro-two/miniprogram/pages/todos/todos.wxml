@@ -1,0 +1,15 @@
+<!-- pages/todos/todos.wxml -->
+<text>pages/todos/todos.wxml</text>
+<input bindinput="handleInput" data-val='val' value="{{val}}" />
+<input bindinput="handleInput" data-val='val1' value="{{val1}}" />
+<button bind:tap="onAdd">来一条todo</button>
+<view>
+  <block wx:for="{{todos}}" wx:key="{{item._id}}">
+    <view>
+      <view data-id="{{item._id}}" bind:tap="done" class="{{item.done? 'line' : ''}}">
+        <text>{{item.todo}}</text>
+      </view>
+      <button data-id="{{item._id}}" bind:tap="del" size="mini">删除</button>
+    </view>
+  </block>
+</view>

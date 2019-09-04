@@ -63,6 +63,7 @@ Page({
       console.log(data)
     }
     that.success = function(data) {
+      console.log(data)
       var weatherData = data.currentWeather[0]
       weatherData =
         "城市：" +

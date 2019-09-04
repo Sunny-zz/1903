@@ -1,0 +1,4 @@
+/* pages/todos/todos.wxss */
+.line {
+  text-decoration: line-through;
+}
