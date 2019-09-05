@@ -114,8 +114,11 @@ Page({
     wx.cloud.callFunction({
       // 云函数名称
       name: "getTodos",
-      success: function(res) {
+      success: res => {
         console.log(res)
+        this.setData({
+          todos: res.result.todos
+        })
       },
       fail: console.error
     })

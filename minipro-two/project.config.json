@@ -31,7 +31,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -43,6 +43,20 @@
 					"id": -1,
 					"name": "todos",
 					"pathName": "pages/todos/todos",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "up",
+					"pathName": "pages/upload/upload",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "图片展示",
+					"pathName": "pages/storageConsole/storageConsole",
 					"scene": null
 				}
 			]

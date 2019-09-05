@@ -3,7 +3,7 @@
 <input bindinput="handleInput" data-val='val' value="{{val}}" />
 <input bindinput="handleInput" data-val='val1' value="{{val1}}" />
 <button bind:tap="onAdd">来一条todo</button>
-<view>
+<view wx:if="{{todos.length}}">
   <block wx:for="{{todos}}" wx:key="{{item._id}}">
     <view>
       <view data-id="{{item._id}}" bind:tap="done" class="{{item.done? 'line' : ''}}">
@@ -13,3 +13,4 @@
     </view>
   </block>
 </view>
+<view wx:else>评论为空</view>
