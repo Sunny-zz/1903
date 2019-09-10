@@ -1,6 +1,14 @@
 <!-- index.wxml -->
+<view>{{total}}</view>
 <view class="container">
   <!-- 用户 openid -->
+  <!-- 晴 https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1153717153,1087271395&fm=15&gp=0.jpg -->
+  <!-- 雨 https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1642368834,515226038&fm=15&gp=0.jpg -->
+  <!-- 多云 https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=375473214,1290912980&fm=15&gp=0.jpg -->
+  <view style="width: 200px;height:200px;" class="{{num.info === '晴' ? 'qing' : (num.info.indexOf('雨') != -1 ? 'yu' : 'duoyun')}}">
+    <text>{{num.info}}</text>
+    <text>{{num.info === '晴' ? '晴' : num.info.indexOf('雨') != -1 ? '雨' : '多云'}}</text>
+  </view>
   <view class="userinfo">
     <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="userinfo-avatar" style="background-image: url({{avatarUrl}})"></button>
     <view>
