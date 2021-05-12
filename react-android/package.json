@@ -10,7 +10,7 @@
     "react-infinite-loader": "^1.0.4",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "swiper": "^4.5.0"
+    "swiper": "^6.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
